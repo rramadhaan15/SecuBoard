@@ -1,21 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Play, 
-  Square, 
-  RefreshCw, 
-  Terminal, 
-  Globe, 
-  ShieldAlert, 
-  Search, 
-  Zap, 
-  Clock, 
-  CheckCircle, 
-  AlertTriangle,
-  History,
-  Radio,
-  Sliders,
-  ExternalLink
-} from 'lucide-react';
 import { ScannerStatus, ScanJob, LogItem } from '../types';
 
 interface ContinuousScannerViewProps {
@@ -56,7 +39,7 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
     { label: 'API Gateway (api.republika.co.id)', url: 'https://api.republika.co.id' },
   ];
 
-  // Auto scroll terminal to latest
+  // Auto scroll terminal to bottom
   useEffect(() => {
     if (terminalEndRef.current) {
       terminalEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -75,25 +58,25 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Top Banner explaining Continuous Scanner in research context */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* Banner */}
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-            <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-sky-400"></span>
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">
               Autonomous OWASP ZAP Scanner
             </span>
           </div>
-          <h2 className="text-xl font-bold text-white mt-1">
+          <h2 className="text-lg sm:text-xl font-bold text-white mt-1">
             Pusat Pengujian &amp; Pemindaian Berkelanjutan Website Republika
           </h2>
-          <p className="text-xs text-slate-400 mt-1 max-w-2xl">
-            Sistem menjalankan siklus iteratif otomatis: Spidering (Sprint 1) &rarr; Passive Analysis &amp; Active Payload Injection (Sprint 2) &rarr; Evaluasi OWASP Top 10 (Sprint 3) secara kontinu tanpa intervensi manual.
+          <p className="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed">
+            Sistem menjalankan siklus pengujian: Spidering (Sprint 1) &rarr; Passive Analysis &amp; Active Payload Injection (Sprint 2) &rarr; Evaluasi OWASP Top 10 (Sprint 3) secara kontinu tanpa intervensi manual.
           </p>
         </div>
 
-        {/* Continuous Toggle Big Widget */}
-        <div className="flex items-center gap-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
+        {/* Continuous Toggle Widget */}
+        <div className="flex items-center gap-4 bg-slate-950 p-3 rounded-lg border border-slate-800 shrink-0">
           <div className="space-y-0.5">
             <div className="text-xs font-semibold text-slate-200">Mode Continuous Scan</div>
             <div className="text-[11px] text-slate-400">
@@ -102,31 +85,29 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
           </div>
           <button
             onClick={onToggleContinuous}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 shadow-lg ${
+            className={`px-4 py-2 rounded-md text-xs font-semibold transition-all ${
               isContinuous
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-emerald-500/20'
+                ? 'bg-emerald-600 text-white shadow-sm'
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
             }`}
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isContinuous ? 'animate-spin' : ''}`} />
-            <span>{isContinuous ? 'BERJALAN' : 'AKTIFKAN'}</span>
+            {isContinuous ? 'BERJALAN' : 'AKTIFKAN'}
           </button>
         </div>
       </div>
 
-      {/* Control Panel: Target & Scan Configuration */}
+      {/* Control Panel & Terminal */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Configuration Form */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <Sliders className="w-4 h-4 text-cyan-400" />
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-white">
             Parameter Pemindaian OWASP ZAP
           </h3>
 
           {/* Preset Targets */}
           <div>
             <label className="block text-xs font-semibold text-slate-400 mb-1.5">
-              Pilih Target Aset Republika:
+              Target Aset Republika:
             </label>
             <div className="space-y-1.5">
               {targetPresets.map((preset) => (
@@ -137,14 +118,14 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
                     setSelectedTarget(preset.url);
                     setCustomTarget('');
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium border transition-colors flex items-center justify-between ${
+                  className={`w-full text-left px-3 py-2 rounded-md text-xs font-medium border transition-colors flex items-center justify-between ${
                     selectedTarget === preset.url && !customTarget
-                      ? 'bg-cyan-950/60 border-cyan-500/50 text-cyan-300'
-                      : 'bg-slate-800/40 border-slate-800 text-slate-300 hover:bg-slate-800'
+                      ? 'bg-sky-950/60 border-sky-500/50 text-sky-300'
+                      : 'bg-slate-950 border-slate-800 text-slate-300 hover:bg-slate-800'
                   }`}
                 >
                   <span className="truncate">{preset.label}</span>
-                  <Radio className={`w-3.5 h-3.5 ${selectedTarget === preset.url && !customTarget ? 'text-cyan-400' : 'text-slate-600'}`} />
+                  <span className={`w-2 h-2 rounded-full ${selectedTarget === preset.url && !customTarget ? 'bg-sky-400' : 'bg-slate-700'}`}></span>
                 </button>
               ))}
             </div>
@@ -155,19 +136,16 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
             <label className="block text-xs font-semibold text-slate-400 mb-1">
               Atau Input URL Sasaran Spesifik:
             </label>
-            <div className="relative">
-              <Globe className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
-              <input
-                type="url"
-                value={customTarget}
-                onChange={(e) => setCustomTarget(e.target.value)}
-                placeholder="https://republika.co.id/sub-path..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500"
-              />
-            </div>
+            <input
+              type="url"
+              value={customTarget}
+              onChange={(e) => setCustomTarget(e.target.value)}
+              placeholder="https://republika.co.id/sub-path..."
+              className="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-sky-500"
+            />
           </div>
 
-          {/* Scan Type / Depth */}
+          {/* Scan Type */}
           <div>
             <label className="block text-xs font-semibold text-slate-400 mb-1.5">
               Profil Pemindaian (Scan Profile):
@@ -175,10 +153,10 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
             >
               <option value="Full Scan (Spider + Passive + Active)">
-                Full Scan (Spider + Passive + Active - Rekomendasi TA)
+                Full Scan (Spider + Passive + Active - Standar TA)
               </option>
               <option value="Spider & Deteksi Arsitektur (Sprint 1)">
                 Spidering / Crawling Only (Sprint 1)
@@ -196,9 +174,9 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
           <div className="pt-2 border-t border-slate-800">
             <div className="flex justify-between items-center mb-1">
               <label className="text-xs font-semibold text-slate-400">
-                Interval Siklus Scan Otomatis:
+                Interval Siklus Otomatis:
               </label>
-              <span className="text-xs font-mono font-bold text-cyan-400">{intervalSec} Detik</span>
+              <span className="text-xs font-mono font-bold text-sky-400">{intervalSec} Detik</span>
             </div>
             <input
               type="range"
@@ -207,10 +185,10 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
               step="15"
               value={intervalSec}
               onChange={(e) => handleIntervalChange(Number(e.target.value))}
-              className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+              className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500"
             />
             <div className="flex justify-between text-[10px] text-slate-500 mt-1">
-              <span>15s (Demo Cepat)</span>
+              <span>15s (Cepat)</span>
               <span>1 Menit</span>
               <span>5 Menit</span>
             </div>
@@ -221,75 +199,68 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
             {isScanning ? (
               <button
                 onClick={onStopScan}
-                className="w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30 transition-all"
+                className="w-full py-2 rounded-md bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs shadow-sm transition-all"
               >
-                <Square className="w-4 h-4 fill-current" />
-                <span>Hentikan Proses Pemindaian</span>
+                Hentikan Proses Pemindaian
               </button>
             ) : (
               <button
                 onClick={handleStart}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/30 transition-all"
+                className="w-full py-2 rounded-md bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs shadow-sm transition-all"
               >
-                <Play className="w-4 h-4 fill-current" />
-                <span>Mulai Scan Sekarang</span>
+                Mulai Scan Sekarang
               </button>
             )}
           </div>
         </div>
 
-        {/* Right: Live Scan Execution Console & Progress */}
-        <div className="lg:col-span-2 bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col justify-between space-y-4">
-          {/* Active Job Header / Phase */}
+        {/* Right: Live Console */}
+        <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col justify-between space-y-4">
           <div>
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-bold text-white">
-                  Console Pemindaian Real-Time (Live OWASP ZAP Execution)
-                </h3>
-              </div>
-              <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-bold text-white">
+                Console Pemindaian Real-Time (Live OWASP ZAP Execution)
+              </h3>
+              <span className={`text-[11px] px-2.5 py-0.5 rounded font-mono font-semibold ${
                 isScanning
-                  ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 animate-pulse'
-                  : 'bg-slate-800 text-slate-400 border border-slate-700'
+                  ? 'bg-sky-950 text-sky-400 border border-sky-800'
+                  : 'bg-slate-800 text-slate-400'
               }`}>
-                {isScanning ? 'Scan Sedang Berjalan' : 'Siap / Standby'}
+                {isScanning ? 'SCANNING' : 'STANDBY'}
               </span>
             </div>
 
-            {/* Current Phase & Animated Progress */}
+            {/* Current Phase & Progress */}
             {currentScan ? (
-              <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800/90 space-y-2 mb-3">
+              <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-2 mb-3">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-300">
-                    Fase Aktif: <strong className="text-cyan-400">{currentScan.phase}</strong>
+                    Fase: <strong className="text-sky-400">{currentScan.phase}</strong>
                   </span>
-                  <span className="font-mono font-bold text-cyan-400">{currentScan.progress}%</span>
+                  <span className="font-mono font-bold text-sky-400">{currentScan.progress}%</span>
                 </div>
 
-                {/* Progress bar */}
-                <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
                   <div 
-                    className="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-400 transition-all duration-300"
+                    className="h-full bg-sky-500 transition-all duration-300"
                     style={{ width: `${currentScan.progress}%` }}
                   ></div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 font-mono pt-1">
+                <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 font-mono pt-0.5">
                   <span className="truncate max-w-[280px]">URL: {currentScan.currentUrl}</span>
                   <span>Crawled: {currentScan.urlsCrawled} | Req: {currentScan.requestsSent}</span>
                 </div>
               </div>
             ) : (
-              <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/60 text-xs text-slate-400 flex items-center justify-between mb-3">
-                <span>Tidak ada pemindaian aktif saat ini. Tekan &quot;Mulai Scan Sekarang&quot; untuk menjalankan ZAP.</span>
-                <span className="text-cyan-400 font-mono">Engine: Standby</span>
+              <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-400 flex items-center justify-between mb-3">
+                <span>Tidak ada pemindaian aktif saat ini. Tekan &quot;Mulai Scan Sekarang&quot; untuk menjalankan scanner.</span>
+                <span className="text-slate-500 font-mono">Engine: Standby</span>
               </div>
             )}
 
-            {/* Live Real-time Terminal Log Output */}
-            <div className="rounded-xl bg-slate-950 border border-slate-800 p-3 h-72 overflow-y-auto font-mono text-xs space-y-1.5 shadow-inner">
+            {/* Live Terminal */}
+            <div className="rounded-lg bg-slate-950 border border-slate-800 p-3 h-72 overflow-y-auto font-mono text-xs space-y-1.5">
               {logs.length === 0 ? (
                 <div className="text-slate-600 text-center py-20 italic">
                   Menunggu keluaran log dari OWASP ZAP scanner...
@@ -297,11 +268,11 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
               ) : (
                 logs.map((log) => {
                   let badgeColor = 'text-slate-400 bg-slate-800';
-                  if (log.level === 'SPIDER') badgeColor = 'text-cyan-300 bg-cyan-950 border border-cyan-800';
+                  if (log.level === 'SPIDER') badgeColor = 'text-sky-300 bg-sky-950 border border-sky-800';
                   else if (log.level === 'PASSIVE') badgeColor = 'text-blue-300 bg-blue-950 border border-blue-800';
                   else if (log.level === 'ACTIVE') badgeColor = 'text-amber-300 bg-amber-950 border border-amber-800';
                   else if (log.level === 'DANGER') badgeColor = 'text-rose-300 bg-rose-950 border border-rose-800 font-bold';
-                  else if (log.level === 'WARN') badgeColor = 'text-yellow-300 bg-yellow-950 border border-yellow-800';
+                  else if (log.level === 'WARN') badgeColor = 'text-amber-300 bg-amber-950 border border-amber-800';
                   else if (log.level === 'SUCCESS') badgeColor = 'text-emerald-300 bg-emerald-950 border border-emerald-800';
 
                   return (
@@ -309,7 +280,7 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
                       <span className="text-slate-600 text-[10px] shrink-0">
                         {new Date(log.timestamp).toLocaleTimeString('id-ID')}
                       </span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono shrink-0 ${badgeColor}`}>
+                      <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono shrink-0 ${badgeColor}`}>
                         {log.level}
                       </span>
                       <span className={`text-slate-300 break-all ${
@@ -327,42 +298,32 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
             </div>
           </div>
 
-          {/* Quick Scanner Indicators Footer */}
+          {/* Footer */}
           <div className="pt-2 border-t border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
-            <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1">
-                <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                OWASP ZAP 2.14 Core Ruleset
-              </span>
-              <span className="flex items-center gap-1">
-                <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                Active Injection Heuristics
-              </span>
+            <div>
+              Aturan Inti: OWASP ZAP Core Ruleset &bull; Passive &amp; Active Heuristics
             </div>
-            <span className="text-slate-400">
-              Total Log Terkumpul: <strong className="text-white">{logs.length}</strong> entri
+            <span>
+              Total Log: <strong className="text-white font-mono">{logs.length}</strong> entri
             </span>
           </div>
         </div>
       </div>
 
-      {/* Scan History Table */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3">
+      {/* History Table */}
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <History className="w-4 h-4 text-cyan-400" />
-            <h3 className="text-base font-bold text-white">
-              Riwayat Pemindaian &amp; Hasil Scan Berkala
-            </h3>
-          </div>
-          <span className="text-xs text-slate-400">
-            Total Eksekusi: <strong className="text-white">{scanHistory.length}</strong> Sesi Pemindaian
+          <h3 className="text-sm font-bold text-white">
+            Riwayat Pemindaian &amp; Hasil Scan Berkala
+          </h3>
+          <span className="text-xs text-slate-400 font-mono">
+            Total Sesi: {scanHistory.length}
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-950/60 text-slate-400 border-b border-slate-800 font-medium">
+            <thead className="bg-slate-950 text-slate-400 border-b border-slate-800 font-semibold">
               <tr>
                 <th className="py-2.5 px-3">ID Scan</th>
                 <th className="py-2.5 px-3">Target Sasaran</th>
@@ -377,38 +338,38 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
             <tbody className="divide-y divide-slate-800/60">
               {scanHistory.map((scan) => (
                 <tr key={scan.id} className="hover:bg-slate-800/30 transition-colors">
-                  <td className="py-3 px-3 font-mono font-medium text-cyan-400">{scan.id}</td>
-                  <td className="py-3 px-3 font-mono text-slate-300">{scan.targetUrl}</td>
-                  <td className="py-3 px-3 text-slate-300">{scan.scanType}</td>
-                  <td className="py-3 px-3 text-slate-400">
+                  <td className="py-2.5 px-3 font-mono font-medium text-sky-400">{scan.id}</td>
+                  <td className="py-2.5 px-3 font-mono text-slate-300">{scan.targetUrl}</td>
+                  <td className="py-2.5 px-3 text-slate-300">{scan.scanType}</td>
+                  <td className="py-2.5 px-3 text-slate-400">
                     {new Date(scan.startTime).toLocaleString('id-ID')}
                   </td>
-                  <td className="py-3 px-3 text-slate-300 font-mono">{scan.duration || 'Running'}</td>
-                  <td className="py-3 px-3 text-slate-400 font-mono">
+                  <td className="py-2.5 px-3 text-slate-300 font-mono">{scan.duration || 'Running'}</td>
+                  <td className="py-2.5 px-3 text-slate-400 font-mono">
                     {scan.urlsCrawled} URLs / {scan.requestsSent} Req
                   </td>
-                  <td className="py-3 px-3">
+                  <td className="py-2.5 px-3">
                     <div className="flex items-center gap-1.5 font-mono">
                       {scan.alertsFound.high > 0 && (
-                        <span className="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 font-bold">
+                        <span className="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 font-bold">
                           {scan.alertsFound.high} H
                         </span>
                       )}
                       {scan.alertsFound.medium > 0 && (
-                        <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">
+                        <span className="px-1.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">
                           {scan.alertsFound.medium} M
                         </span>
                       )}
                       {scan.alertsFound.low > 0 && (
-                        <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400">
+                        <span className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">
                           {scan.alertsFound.low} L
                         </span>
                       )}
                       <span className="text-slate-400">({scan.alertsFound.total} total)</span>
                     </div>
                   </td>
-                  <td className="py-3 px-3">
-                    <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  <td className="py-2.5 px-3">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800">
                       {scan.status}
                     </span>
                   </td>

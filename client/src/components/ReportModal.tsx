@@ -1,16 +1,4 @@
 import React from 'react';
-import { 
-  X, 
-  Printer, 
-  Download, 
-  FileText, 
-  ShieldCheck, 
-  Award, 
-  CheckCircle, 
-  Building,
-  User,
-  Calendar
-} from 'lucide-react';
 import { Vulnerability, OverviewMetrics, Sprint } from '../types';
 
 interface ReportModalProps {
@@ -53,45 +41,40 @@ export const ReportModal: React.FC<ReportModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-sm flex items-center justify-center p-2 sm:p-6 print:p-0 print:bg-white print:text-black">
       <div 
-        className="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-5xl w-full max-h-[94vh] overflow-y-auto shadow-2xl flex flex-col print:border-none print:shadow-none print:max-h-none print:w-full print:bg-white print:text-black"
+        className="bg-slate-900 border border-slate-750 rounded-xl max-w-5xl w-full max-h-[94vh] overflow-y-auto shadow-2xl flex flex-col print:border-none print:shadow-none print:max-h-none print:w-full print:bg-white print:text-black"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Actions (Hidden in Print) */}
         <div className="p-4 border-b border-slate-800 bg-slate-950 flex items-center justify-between gap-4 sticky top-0 z-20 print:hidden">
-          <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 text-cyan-400" />
-            <span className="text-sm font-bold text-white">
-              Dokumen Resmi Laporan Audit Keamanan Siber &amp; Sidang TA
-            </span>
+          <div className="text-sm font-bold text-white">
+            Dokumen Resmi Laporan Audit Keamanan Siber &amp; Sidang TA
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handleDownloadJson}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition-colors"
+              className="px-3 py-1.5 rounded text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
             >
-              <Download className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Ekspor JSON</span>
+              Ekspor JSON
             </button>
             <button
               onClick={handlePrint}
-              className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white shadow-md flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-1.5 rounded text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white shadow-sm transition-colors"
             >
-              <Printer className="w-3.5 h-3.5" />
-              <span>Cetak / Simpan PDF</span>
+              Cetak / Simpan PDF
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors ml-2"
+              className="px-2.5 py-1.5 rounded text-xs bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors ml-2"
             >
-              <X className="w-5 h-5" />
+              Tutup
             </button>
           </div>
         </div>
 
-        {/* Report Content - Styled for both screen & paper print */}
+        {/* Report Content */}
         <div className="p-6 sm:p-10 space-y-8 bg-slate-900 text-slate-200 print:bg-white print:text-black print:p-4 text-xs sm:text-sm">
-          {/* Institutional Academic Header */}
+          {/* Header */}
           <div className="border-b-2 border-slate-700 pb-6 text-center space-y-2 print:border-black">
             <div className="text-xs uppercase tracking-widest text-slate-400 print:text-slate-600 font-bold">
               UNIVERSITAS PEMBANGUNAN NASIONAL &ldquo;VETERAN&rdquo; JAKARTA
@@ -104,18 +87,18 @@ export const ReportModal: React.FC<ReportModalProps> = ({
             </div>
 
             <div className="pt-3">
-              <span className="inline-block px-3 py-1 rounded bg-blue-950 text-cyan-300 font-mono text-xs border border-blue-800 print:bg-slate-100 print:text-black print:border-black">
+              <span className="inline-block px-3 py-1 rounded bg-slate-950 text-sky-400 font-mono text-xs border border-slate-800 print:bg-slate-100 print:text-black print:border-black">
                 DOKUMEN HASIL AUDIT KERENTANAN SISTEM KEAMANAN WEB
               </span>
             </div>
 
-            <h1 className="text-lg sm:text-xl font-extrabold text-white print:text-black mt-2 leading-snug uppercase">
+            <h1 className="text-base sm:text-lg font-bold text-white print:text-black mt-2 leading-snug uppercase">
               IMPLEMENTASI WEB VULNERABILITY SCANNER BERBASIS OWASP DETEKSI KERENTANAN WEBSITE REPUBLIKA
             </h1>
           </div>
 
           {/* Research Metadata Block */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-950 p-4 rounded-xl border border-slate-800 print:bg-slate-50 print:border-slate-300 print:text-black">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-950 p-4 rounded-lg border border-slate-800 print:bg-slate-50 print:border-slate-300 print:text-black">
             <div className="space-y-1.5 text-xs">
               <div>
                 <strong className="text-slate-400 print:text-slate-600">Peneliti:</strong>{' '}
@@ -123,7 +106,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
               </div>
               <div>
                 <strong className="text-slate-400 print:text-slate-600">NIM:</strong>{' '}
-                <span className="font-mono text-cyan-400 print:text-black">2410501091</span>
+                <span className="font-mono text-sky-400 print:text-black">2410501091</span>
               </div>
               <div>
                 <strong className="text-slate-400 print:text-slate-600">Program Studi:</strong>{' '}
@@ -174,24 +157,24 @@ export const ReportModal: React.FC<ReportModalProps> = ({
               II. Ringkasan Kuantitatif Temuan Celah Keamanan
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div className="p-3 rounded-lg bg-rose-950/40 border border-rose-800 text-rose-300 print:bg-slate-100 print:text-black print:border-black">
+              <div className="p-3 rounded bg-rose-950/60 border border-rose-800 text-rose-300 print:bg-slate-100 print:text-black print:border-black">
                 <span className="text-xs font-semibold">High Severity</span>
-                <p className="text-2xl font-extrabold">{metrics?.severityCounts.high}</p>
+                <p className="text-2xl font-bold font-mono">{metrics?.severityCounts.high}</p>
                 <span className="text-[10px] text-slate-400 print:text-slate-600">SLA: &lt; 24 Jam</span>
               </div>
-              <div className="p-3 rounded-lg bg-amber-950/40 border border-amber-800 text-amber-300 print:bg-slate-100 print:text-black print:border-black">
+              <div className="p-3 rounded bg-amber-950/60 border border-amber-800 text-amber-300 print:bg-slate-100 print:text-black print:border-black">
                 <span className="text-xs font-semibold">Medium Severity</span>
-                <p className="text-2xl font-extrabold">{metrics?.severityCounts.medium}</p>
+                <p className="text-2xl font-bold font-mono">{metrics?.severityCounts.medium}</p>
                 <span className="text-[10px] text-slate-400 print:text-slate-600">SLA: &lt; 72 Jam</span>
               </div>
-              <div className="p-3 rounded-lg bg-blue-950/40 border border-blue-800 text-blue-300 print:bg-slate-100 print:text-black print:border-black">
-                <span className="text-xs font-semibold">Low &amp; Informational</span>
-                <p className="text-2xl font-extrabold">{(metrics?.severityCounts.low || 0) + (metrics?.severityCounts.info || 0)}</p>
+              <div className="p-3 rounded bg-slate-950 border border-slate-800 text-slate-300 print:bg-slate-100 print:text-black print:border-black">
+                <span className="text-xs font-semibold">Low &amp; Info</span>
+                <p className="text-2xl font-bold font-mono">{(metrics?.severityCounts.low || 0) + (metrics?.severityCounts.info || 0)}</p>
                 <span className="text-[10px] text-slate-400 print:text-slate-600">Security Hardening</span>
               </div>
-              <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-emerald-300 print:bg-slate-100 print:text-black print:border-black">
+              <div className="p-3 rounded bg-emerald-950/60 border border-emerald-800 text-emerald-300 print:bg-slate-100 print:text-black print:border-black">
                 <span className="text-xs font-semibold">Tingkat Patching</span>
-                <p className="text-2xl font-extrabold">{metrics?.resolutionRate}%</p>
+                <p className="text-2xl font-bold font-mono">{metrics?.resolutionRate}%</p>
                 <span className="text-[10px] text-slate-400 print:text-slate-600">MTTR: {metrics?.mttrHours} Jam</span>
               </div>
             </div>
@@ -222,7 +205,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
                         <div className={`text-[10px] font-bold ${
                           vuln.severity === 'High' ? 'text-rose-400 print:text-red-700' :
                           vuln.severity === 'Medium' ? 'text-amber-400 print:text-amber-700' :
-                          'text-blue-400 print:text-blue-700'
+                          'text-slate-400 print:text-slate-700'
                         }`}>
                           {vuln.severity} ({vuln.cvss})
                         </div>
@@ -243,7 +226,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
                         C:{vuln.ciaImpact.confidentiality[0]} | I:{vuln.ciaImpact.integrity[0]} | A:{vuln.ciaImpact.availability[0]}
                       </td>
                       <td className="py-2.5 px-2.5 text-[11px] text-slate-300 print:text-black">
-                        <strong className="text-cyan-300 print:text-black">{vuln.remediation.quickFixTitle}</strong>
+                        <strong className="text-sky-300 print:text-black">{vuln.remediation.quickFixTitle}</strong>
                         <p className="text-[10px] text-slate-400 print:text-slate-600 line-clamp-2">
                           {vuln.remediation.description}
                         </p>
@@ -255,7 +238,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
             </div>
           </div>
 
-          {/* Validation & Signature Block */}
+          {/* Validation & Signatures */}
           <div className="pt-8 border-t-2 border-slate-700 print:border-black space-y-8">
             <div className="text-xs text-slate-400 print:text-slate-700 text-center italic">
               Dokumen ini disusun sebagai bukti luaran implementasi Tugas Akhir Program Studi DIII Sistem Informasi, Fakultas Ilmu Komputer, UPN &ldquo;Veteran&rdquo; Jakarta tahun 2026.

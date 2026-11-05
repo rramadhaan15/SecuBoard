@@ -1,16 +1,5 @@
 import React from 'react';
-import { 
-  CheckCircle, 
-  Clock, 
-  Calendar, 
-  Layers, 
-  TrendingUp, 
-  GitBranch, 
-  ListTodo, 
-  Sparkles,
-  ArrowRight
-} from 'lucide-react';
-import { Sprint, SprintTask } from '../types';
+import { Sprint } from '../types';
 
 interface ScrumBoardViewProps {
   sprints: Sprint[];
@@ -24,30 +13,27 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
-              Metodologi Penelitian (Bab 2.1.6 &amp; Bab 3.1)
-            </span>
-          </div>
-          <h2 className="text-xl font-bold text-white mt-1">
+          <span className="text-xs font-bold text-sky-400 uppercase tracking-wider block">
+            Metodologi Penelitian (Bab 2.1.6 &amp; Bab 3.1)
+          </span>
+          <h2 className="text-lg sm:text-xl font-bold text-white mt-1">
             Framework Manajemen Pengujian Agile Scrum
           </h2>
-          <p className="text-xs text-slate-400 mt-1 max-w-2xl">
+          <p className="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed">
             Pengujian kerentanan website Republika dikelola dalam 3 siklus Sprint iteratif: Mulai dari Spidering &amp; Deteksi Arsitektur, Pemindaian Aktif/Pasif OWASP ZAP, hingga Analisis Klasifikasi Risiko &amp; Mitigasi.
           </p>
         </div>
 
-        {/* Sprint Summary Pill */}
-        <div className="flex items-center gap-3">
-          <div className="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-center min-w-[90px]">
+        <div className="flex items-center gap-2.5 shrink-0">
+          <div className="px-3.5 py-2 rounded-lg bg-slate-950 border border-slate-800 text-center min-w-[85px]">
             <span className="text-xs text-slate-400">Total Sprints</span>
-            <p className="text-lg font-extrabold text-white">3 Sprints</p>
+            <p className="text-base font-bold text-white font-mono">3 Sprints</p>
           </div>
-          <div className="px-3.5 py-2 rounded-xl bg-cyan-950/40 border border-cyan-800/60 text-center min-w-[90px]">
-            <span className="text-xs text-cyan-400 font-semibold">Total Points</span>
-            <p className="text-lg font-extrabold text-cyan-400">90 SP</p>
+          <div className="px-3.5 py-2 rounded-lg bg-sky-950/60 border border-sky-800 text-center min-w-[85px]">
+            <span className="text-xs text-sky-400 font-semibold">Total Points</span>
+            <p className="text-base font-bold text-sky-300 font-mono">90 SP</p>
           </div>
         </div>
       </div>
@@ -61,15 +47,15 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
 
           let statusBadgeClass = 'bg-slate-800 text-slate-300 border-slate-700';
           if (sprint.status === 'Completed') {
-            statusBadgeClass = 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+            statusBadgeClass = 'bg-emerald-950 text-emerald-400 border-emerald-800';
           } else if (sprint.status === 'In Progress' || sprint.status === 'Active') {
-            statusBadgeClass = 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30 animate-pulse';
+            statusBadgeClass = 'bg-sky-950 text-sky-400 border border-sky-800';
           }
 
           return (
             <div
               key={sprint.id}
-              className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col justify-between space-y-4"
+              className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 {/* Sprint Header */}
@@ -82,32 +68,31 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
                       {sprint.name.replace(`Sprint ${sprint.number}: `, '')}
                     </h3>
                   </div>
-                  <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${statusBadgeClass}`}>
+                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${statusBadgeClass}`}>
                     {sprint.status}
                   </span>
                 </div>
 
                 {/* Sprint Goal */}
-                <p className="text-xs text-slate-300 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 leading-relaxed">
+                <p className="text-xs text-slate-300 bg-slate-950 p-2.5 rounded-lg border border-slate-800 leading-relaxed">
                   <strong>Tujuan:</strong> {sprint.goal}
                 </p>
 
-                {/* Dates & Story Points Progress */}
+                {/* Dates & Story Points */}
                 <div className="space-y-1.5 pt-1">
                   <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                    <span>
                       {sprint.startDate} s/d {sprint.endDate}
                     </span>
-                    <span className="font-mono font-bold text-cyan-400">
+                    <span className="font-mono font-bold text-sky-400">
                       {sprint.storyPointsCompleted} / {sprint.storyPointsTotal} SP ({completionPercent}%)
                     </span>
                   </div>
 
                   {/* Progress Bar */}
-                  <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300"
+                      className="h-full bg-sky-500 transition-all duration-300"
                       style={{ width: `${completionPercent}%` }}
                     ></div>
                   </div>
@@ -116,10 +101,7 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
                 {/* Sprint Tasks List */}
                 <div className="space-y-2 pt-2">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
-                    <span className="flex items-center gap-1.5">
-                      <ListTodo className="w-3.5 h-3.5" />
-                      Sprint Backlog &amp; Checklist:
-                    </span>
+                    <span>Sprint Backlog:</span>
                     <span>Status</span>
                   </div>
 
@@ -127,7 +109,7 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
                     {sprint.tasks.map((task) => (
                       <div
                         key={task.id}
-                        className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 flex items-center justify-between gap-2 text-xs"
+                        className="p-2.5 rounded bg-slate-950 border border-slate-800 flex items-center justify-between gap-2 text-xs"
                       >
                         <div className="space-y-0.5 flex-1 min-w-0">
                           <span className="font-mono text-[10px] text-slate-500">
@@ -142,8 +124,8 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
                           value={task.status}
                           onChange={(e) => onUpdateTaskStatus(sprint.id, task.id, e.target.value)}
                           className={`text-[11px] font-semibold px-2 py-1 rounded border focus:outline-none ${
-                            task.status === 'Done' ? 'bg-emerald-950/80 border-emerald-700 text-emerald-300' :
-                            task.status === 'In Progress' ? 'bg-blue-950/80 border-blue-700 text-blue-300' :
+                            task.status === 'Done' ? 'bg-emerald-950 border-emerald-800 text-emerald-300' :
+                            task.status === 'In Progress' ? 'bg-sky-950 border-sky-800 text-sky-300' :
                             'bg-slate-900 border-slate-700 text-slate-400'
                           }`}
                         >
@@ -157,31 +139,28 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
                 </div>
               </div>
 
-              {/* Sprint Footer Note */}
-              <div className="pt-3 border-t border-slate-800/80 text-[11px] text-slate-400 flex items-center justify-between">
+              {/* Sprint Footer */}
+              <div className="pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
                 <span>Evaluasi Sprint Review &amp; Retro</span>
-                <span className="text-emerald-400 font-medium flex items-center gap-1">
-                  <CheckCircle className="w-3 h-3" /> Terverifikasi
-                </span>
+                <span className="text-emerald-400 font-medium">Terverifikasi</span>
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Research Schedule Timeline (Tabel 3.4 Jadwal Penelitian) */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3">
+      {/* Research Schedule Table (Tabel 3.4 Jadwal Penelitian) */}
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-cyan-400" />
+            <h3 className="text-sm font-bold text-white">
               Tabel 3.4 Jadwal Rencana Penelitian Tugas Akhir (April - Mei 2026)
             </h3>
             <p className="text-xs text-slate-400">
               Pelaksanaan pada PT Republika Media Mandiri, Tebet, Jakarta Selatan
             </p>
           </div>
-          <span className="text-xs font-mono text-cyan-400 font-bold bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">
+          <span className="text-xs font-mono text-sky-400 font-semibold bg-sky-950 px-2.5 py-1 rounded border border-sky-800">
             Jadwal: Sesuai Target
           </span>
         </div>
@@ -228,7 +207,7 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
                     <td
                       key={colIdx}
                       className={`py-2 border-r border-slate-800 ${colIdx === 7 ? 'border-r-0' : ''} ${
-                        val > 0 ? 'bg-cyan-600/30 text-cyan-300 font-bold' : 'text-slate-700'
+                        val > 0 ? 'bg-sky-950 text-sky-400 font-bold' : 'text-slate-700'
                       }`}
                     >
                       {val > 0 ? '✓' : '-'}
