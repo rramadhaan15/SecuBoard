@@ -1,0 +1,16 @@
+{
+  "name": "secuboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SecuBoard - OWASP ZAP Continuous Vulnerability Assessment & BI Dashboard (Studi Kasus: PT Republika Media Mandiri)",
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run start --prefix server\" \"npm run dev --prefix client\"",
+    "dev:server": "npm run start --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "start": "node server/index.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
