@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Modern Cyber Security & Ocean Tech Palette (NO PURPLE/INDIGO)
+        // High-Tech Cyber Defense Palette (Strictly ZERO Purple/Indigo)
         brand: {
           50: '#ecfeff',
           100: '#cffafe',
@@ -22,19 +22,19 @@ export default {
           950: '#083344',
         },
         navy: {
-          950: '#080c14', // Deepest dark background
-          900: '#0c1322', // Primary surface card
-          850: '#111a2e', // Elevated card / inner element
-          800: '#17233d', // Card border / divider
-          750: '#1e2f52', // Hover border
-          700: '#253a63', // Active border
+          950: '#070b14', // Deepest midnight dark
+          900: '#0c1322', // Primary card background
+          850: '#111b2f', // Elevated card / inner element
+          800: '#16233d', // Card border
+          750: '#1d2e50', // Border hover
+          700: '#253962', // Active border
           600: '#344e82',
         },
         republika: {
           red: '#dc2626',
           blue: '#0284c7',
-          navy: '#0b192e',
-          accent: '#06b6d4',
+          cyan: '#06b6d4',
+          navy: '#0b162c',
         }
       },
       fontFamily: {
