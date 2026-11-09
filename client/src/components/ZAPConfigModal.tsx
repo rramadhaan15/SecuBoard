@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  Settings, 
   X, 
   Zap, 
   CheckCircle2, 
   AlertCircle, 
-  Terminal,
-  Server
+  Terminal
 } from 'lucide-react';
 import { ZAPConfig } from '../types';
 
@@ -59,21 +57,21 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
       <div 
-        className="bg-[#0c1322] border border-[#17233d] rounded-2xl max-w-lg w-full shadow-2xl p-6 space-y-5"
+        className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full shadow-2xl p-6 space-y-5"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-[#17233d] pb-3">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-cyan-400" />
-            <h2 className="text-base font-bold text-white">
+            <Zap className="w-5 h-5 text-blue-600" />
+            <h2 className="text-base font-bold text-slate-900">
               Konfigurasi OWASP ZAP Daemon
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-[#111a2e] hover:bg-[#17233d] text-slate-400 hover:text-white border border-[#1e2f52] transition-colors"
+            className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -82,14 +80,14 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
         {/* Current Status */}
         <div className={`p-4 rounded-xl border text-xs space-y-1.5 ${
           config.connected 
-            ? 'bg-emerald-950/40 border-emerald-800 text-emerald-300' 
-            : 'bg-[#080c14] border-[#17233d] text-slate-300'
+            ? 'bg-emerald-50 border-emerald-300 text-emerald-800' 
+            : 'bg-slate-50 border-slate-200 text-slate-700'
         }`}>
-          <div className="font-bold text-white flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${config.connected ? 'bg-emerald-400' : 'bg-cyan-400'}`}></span>
+          <div className="font-bold text-slate-900 flex items-center gap-2">
+            <span className={`w-2 h-2 rounded-full ${config.connected ? 'bg-emerald-500' : 'bg-blue-600'}`}></span>
             <span>Gateway: {config.connected ? 'Terhubung ke OWASP ZAP Daemon' : 'Autonomous Engine Bawaan Aktif'}</span>
           </div>
-          <p className="text-slate-400 leading-relaxed text-[11px]">
+          <p className="text-slate-500 leading-relaxed text-[11px]">
             {config.connected
               ? `Versi ZAP: ${config.version} (Port ${config.port})`
               : 'Dashboard dapat berjalan mandiri menggunakan built-in autonomous engine atau dihubungkan ke aplikasi desktop OWASP ZAP via REST API.'}
@@ -99,7 +97,7 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
         {/* Form */}
         <form onSubmit={handleSave} className="space-y-4 text-xs">
           <div>
-            <label className="block font-bold text-slate-300 uppercase tracking-wider text-[11px] mb-1.5">
+            <label className="block font-bold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
               Host / IP Address:
             </label>
             <input
@@ -107,12 +105,12 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               value={host}
               onChange={(e) => setHost(e.target.value)}
               placeholder="127.0.0.1"
-              className="w-full bg-[#080c14] border border-[#17233d] rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-500 font-mono"
+              className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-xs"
             />
           </div>
 
           <div>
-            <label className="block font-bold text-slate-300 uppercase tracking-wider text-[11px] mb-1.5">
+            <label className="block font-bold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
               Port ZAP Proxy:
             </label>
             <input
@@ -120,12 +118,12 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               value={port}
               onChange={(e) => setPort(Number(e.target.value))}
               placeholder="8080"
-              className="w-full bg-[#080c14] border border-[#17233d] rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-500 font-mono"
+              className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-xs"
             />
           </div>
 
           <div>
-            <label className="block font-bold text-slate-300 uppercase tracking-wider text-[11px] mb-1.5">
+            <label className="block font-bold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
               ZAP API Key (Opsional):
             </label>
             <input
@@ -133,22 +131,22 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               placeholder="Kosongkan jika API key dinonaktifkan di ZAP Options"
-              className="w-full bg-[#080c14] border border-[#17233d] rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-500 font-mono"
+              className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-xs"
             />
           </div>
 
           {testResult && (
             <div className={`p-3 rounded-xl border text-xs flex items-start gap-2 ${
               testResult.success 
-                ? 'bg-emerald-950/40 border-emerald-800 text-emerald-300' 
-                : 'bg-amber-950/40 border-amber-800 text-amber-300'
+                ? 'bg-emerald-50 border-emerald-300 text-emerald-800' 
+                : 'bg-amber-50 border-amber-300 text-amber-800'
             }`}>
               {testResult.success ? (
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               ) : (
-                <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               )}
-              <span className="leading-relaxed">{testResult.message}</span>
+              <span className="leading-relaxed font-medium">{testResult.message}</span>
             </div>
           )}
 
@@ -157,7 +155,7 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               type="button"
               onClick={handleTest}
               disabled={isTesting}
-              className="px-3.5 py-2 rounded-xl bg-[#111a2e] hover:bg-[#17233d] text-cyan-300 font-semibold text-xs transition-colors border border-[#1e2f52]"
+              className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors border border-slate-300 shadow-2xs"
             >
               {isTesting ? 'Menguji...' : 'Uji Koneksi'}
             </button>
@@ -166,13 +164,13 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-3.5 py-2 rounded-xl bg-[#17233d] text-slate-300 hover:bg-[#1e2f52] text-xs font-medium"
+                className="px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold shadow-2xs"
               >
                 Batal
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold shadow-md shadow-cyan-950 transition-all hover:scale-[1.02] active:scale-95"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-95"
               >
                 Simpan Konfigurasi
               </button>
@@ -180,12 +178,12 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
           </div>
         </form>
 
-        <div className="pt-3 border-t border-[#17233d] text-[11px] text-slate-400 space-y-1.5">
-          <p className="font-bold text-slate-300 flex items-center gap-1.5">
-            <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-500 space-y-1.5">
+          <p className="font-bold text-slate-700 flex items-center gap-1.5">
+            <Terminal className="w-3.5 h-3.5 text-blue-600" />
             Panduan Menjalankan OWASP ZAP (Windows):
           </p>
-          <code className="block bg-[#080c14] border border-[#17233d] p-2.5 rounded-xl text-emerald-400 font-mono text-[10px]">
+          <code className="block bg-slate-900 border border-slate-800 p-2.5 rounded-xl text-emerald-400 font-mono text-[10px]">
             zap.bat -daemon -port 8080 -config api.disablekey=true
           </code>
         </div>

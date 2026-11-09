@@ -4,29 +4,28 @@
 
 @layer base {
   body {
-    @apply bg-[#070b14] text-slate-100 font-sans antialiased;
-    background-image: 
-      radial-gradient(ellipse 90% 60% at 50% -15%, rgba(6, 182, 212, 0.12), transparent 70%),
-      radial-gradient(ellipse 70% 50% at 90% 15%, rgba(14, 165, 233, 0.08), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 10% 40%, rgba(16, 185, 129, 0.05), transparent 50%);
+    @apply bg-slate-50 text-slate-800 font-sans antialiased;
+    background-color: #f8fafc;
+    background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
     background-attachment: fixed;
   }
 }
 
-/* Custom scrollbars */
+/* Custom scrollbars for light theme */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #070b14;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #16233d;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #253962;
+  background: #94a3b8;
 }
 
 /* Codeblock & monospace styling */
@@ -34,30 +33,11 @@ pre, code {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* Animations */
-@keyframes cyberPulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 14px rgba(6, 182, 212, 0.35);
-    border-color: rgba(6, 182, 212, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 26px rgba(6, 182, 212, 0.75);
-    border-color: rgba(34, 211, 238, 0.95);
-  }
+/* Card hover animation */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
-.scanner-active-glow {
-  animation: cyberPulseGlow 2s infinite ease-in-out;
-}
-
-/* High-Tech Card Styles */
-.cyber-card {
-  background: linear-gradient(135deg, rgba(17, 27, 47, 0.8) 0%, rgba(12, 19, 34, 0.9) 100%);
-  border: 1px solid rgba(30, 46, 80, 0.8);
-  backdrop-filter: blur(8px);
-}
-
-.cyber-card:hover {
-  border-color: rgba(6, 182, 212, 0.5);
-  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.15);
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
 }

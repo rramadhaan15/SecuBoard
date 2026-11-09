@@ -196,7 +196,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
       {/* Top Header & Navigation */}
       <Header
         scannerStatus={scannerStatus}
@@ -252,25 +252,25 @@ export const App: React.FC = () => {
 
         {activeTab === 'report' && (
           <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-br from-[#111b2f] to-[#0c1322] p-6 rounded-2xl border border-[#1d2e50] shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-cyan-400" />
+                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-blue-600" />
                   Laporan Hasil Pengujian &amp; Dokumen Audit TA
                 </h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   Siap dicetak atau diekspor ke PDF untuk berkas sidang DIII Sistem Informasi UPN &ldquo;Veteran&rdquo; Jakarta
                 </p>
               </div>
               <button
                 onClick={() => setShowReportModal(true)}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-950 transition-all hover:scale-[1.02] active:scale-95 shrink-0"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-95 shrink-0"
               >
                 Buka Pratinjau Dokumen Cetak
               </button>
             </div>
-            <div className="bg-[#0c1322]/80 border border-[#16233d] rounded-2xl p-8 text-center space-y-3">
-              <p className="text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center space-y-3 shadow-xs">
+              <p className="text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
                 Klik tombol di atas untuk membuka dokumen laporan komprehensif lengkap dengan kop resmi Universitas Pembangunan Nasional &quot;Veteran&quot; Jakarta, tabel temuan kerentanan OWASP Top 10, rekomendasi patch teknis, dan lembar tanda tangan pengesahan.
               </p>
             </div>
@@ -278,18 +278,18 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-[#16233d] bg-[#070b14] py-6 text-xs text-slate-500">
+      {/* Footer (Crisp Light Theme) */}
+      <footer className="border-t border-slate-200 bg-white py-6 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <p className="text-slate-300 font-semibold">
+            <p className="text-slate-800 font-bold">
               SecuBoard &mdash; Business Intelligence Vulnerability Assessment Dashboard
             </p>
             <p className="text-slate-500">
               Tugas Akhir: Rizki Ramadhan (NIM: 2410501091) &bull; DIII Sistem Informasi, FIK UPN &ldquo;Veteran&rdquo; Jakarta 2026
             </p>
           </div>
-          <div className="text-center sm:text-right text-slate-400">
+          <div className="text-center sm:text-right text-slate-600">
             <span>Studi Kasus: PT Republika Media Mandiri</span>
             <div className="text-[11px] text-slate-500 mt-0.5">
               Engine: OWASP ZAP 2.14 &bull; Standar: OWASP Top 10:2021 &bull; Framework: Agile Scrum

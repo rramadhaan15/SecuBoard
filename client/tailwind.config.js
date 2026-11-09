@@ -7,34 +7,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        // High-Tech Cyber Defense Palette (Strictly ZERO Purple/Indigo)
+        // Bright, Modern Enterprise Blue & Cyan Palette (ZERO Purple/Indigo)
         brand: {
-          50: '#ecfeff',
-          100: '#cffafe',
-          200: '#a5f3fc',
-          300: '#67e8f9',
-          400: '#22d3ee',
-          500: '#06b6d4', // Vibrant Cyber Cyan
-          600: '#0891b2',
-          700: '#0e7490',
-          800: '#155e75',
-          900: '#164e63',
-          950: '#083344',
-        },
-        navy: {
-          950: '#070b14', // Deepest midnight dark
-          900: '#0c1322', // Primary card background
-          850: '#111b2f', // Elevated card / inner element
-          800: '#16233d', // Card border
-          750: '#1d2e50', // Border hover
-          700: '#253962', // Active border
-          600: '#344e82',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb', // Primary Enterprise Blue
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
         republika: {
           red: '#dc2626',
-          blue: '#0284c7',
-          cyan: '#06b6d4',
-          navy: '#0b162c',
+          blue: '#1e3a8a',
+          cyan: '#0284c7',
+          sky: '#0ea5e9',
         }
       },
       fontFamily: {
@@ -42,11 +32,8 @@ export default {
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       boxShadow: {
-        'cyber-sm': '0 0 10px rgba(6, 182, 212, 0.15)',
-        'cyber': '0 0 20px rgba(6, 182, 212, 0.25)',
-        'cyber-lg': '0 0 30px rgba(6, 182, 212, 0.35)',
-        'emerald-glow': '0 0 20px rgba(16, 185, 129, 0.25)',
-        'rose-glow': '0 0 20px rgba(244, 63, 94, 0.25)',
+        'card': '0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07)',
+        'card-hover': '0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04)',
       }
     },
   },
