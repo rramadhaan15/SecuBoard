@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FileText } from 'lucide-react';
 import { Header } from './components/Header';
 import { OverviewView } from './components/OverviewView';
 import { ContinuousScannerView } from './components/ContinuousScannerView';
@@ -195,7 +196,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans">
       {/* Top Header & Navigation */}
       <Header
         scannerStatus={scannerStatus}
@@ -251,20 +252,25 @@ export const App: React.FC = () => {
 
         {activeTab === 'report' && (
           <div className="space-y-4">
-            <div className="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#0c1322] p-6 rounded-2xl border border-[#17233d] shadow-xl">
               <div>
-                <h3 className="text-base font-bold text-white">Laporan Hasil Pengujian &amp; Dokumen Audit TA</h3>
-                <p className="text-xs text-slate-400">Siap dicetak atau diekspor ke PDF untuk berkas sidang DIII Sistem Informasi UPNVJ</p>
+                <h3 className="text-base font-bold text-white flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-cyan-400" />
+                  Laporan Hasil Pengujian &amp; Dokumen Audit TA
+                </h3>
+                <p className="text-xs text-slate-400 mt-1">
+                  Siap dicetak atau diekspor ke PDF untuk berkas sidang DIII Sistem Informasi UPN &ldquo;Veteran&rdquo; Jakarta
+                </p>
               </div>
               <button
                 onClick={() => setShowReportModal(true)}
-                className="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-md transition-all"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-md shadow-cyan-950 transition-all hover:scale-[1.02] active:scale-95 shrink-0"
               >
                 Buka Pratinjau Dokumen Cetak
               </button>
             </div>
-            <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-8 text-center space-y-3">
-              <p className="text-sm text-slate-300">
+            <div className="bg-[#0c1322]/60 border border-[#17233d] rounded-2xl p-8 text-center space-y-3">
+              <p className="text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
                 Klik tombol di atas untuk membuka dokumen laporan komprehensif lengkap dengan kop resmi Universitas Pembangunan Nasional &quot;Veteran&quot; Jakarta, tabel temuan kerentanan OWASP Top 10, rekomendasi patch teknis, dan lembar tanda tangan pengesahan.
               </p>
             </div>
@@ -273,7 +279,7 @@ export const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-6 text-xs text-slate-500">
+      <footer className="border-t border-[#17233d] bg-[#080c14] py-6 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <p className="text-slate-300 font-semibold">
