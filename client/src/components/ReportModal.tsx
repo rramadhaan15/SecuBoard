@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  FileText, 
   Printer, 
   Download, 
   X
@@ -52,8 +51,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
       >
         {/* Modal Top Actions (Hidden in Print) */}
         <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50 flex items-center justify-between gap-4 sticky top-0 z-20 print:hidden">
-          <div className="flex items-center gap-2">
-            <FileText className="w-4 h-4 text-blue-600" />
+          <div>
             <span className="text-sm font-bold text-slate-900">
               Dokumen Resmi Laporan Audit Keamanan Siber &amp; Sidang TA
             </span>

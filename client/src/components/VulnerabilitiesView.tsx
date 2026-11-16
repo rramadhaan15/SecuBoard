@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Search, 
-  Filter, 
-  ShieldAlert, 
-  FileCode, 
-  AlertCircle, 
-  X, 
-  ChevronRight,
-  ShieldCheck
-} from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { Vulnerability, OWASPCategoryInfo, Status } from '../types';
 
 interface VulnerabilitiesViewProps {
@@ -70,46 +61,45 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 via-white to-sky-50 border border-blue-200/80 p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-1.5 max-w-2xl">
+      {/* Page Header */}
+      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 text-blue-600" />
-            <span className="text-xs font-bold text-blue-700 uppercase tracking-wider">
-              Vulnerability Management System
+            <span className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+              Vulnerability Management
             </span>
           </div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
-            Katalog Celah Keamanan &amp; Remediasi Tepat Sasaran
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+            Katalog Temuan Kerentanan &amp; Remediasi
           </h2>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            Daftar lengkap kerentanan yang terdeteksi oleh pemindai otomatis OWASP ZAP pada seluruh ekosistem digital Republika. Klik tombol &quot;Blueprint Remediasi&quot; untuk melihat kode patch teknis dan konfigurasi hardening server.
+          <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
+            Daftar komprehensif celah keamanan terdeteksi pada ekosistem digital Republika berdasarkan klasifikasi OWASP Top 10:2021. Klik blueprint untuk melihat langkah patch teknis dan konfigurasi web server.
           </p>
         </div>
 
-        {/* Mini Stats Ribbon */}
-        <div className="flex items-center gap-2.5 shrink-0">
-          <div className="px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-center min-w-[80px] shadow-xs">
+        {/* Metric Badges */}
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-200 text-center min-w-[80px]">
             <span className="text-[11px] text-slate-500 block font-medium">Total</span>
-            <p className="text-lg font-extrabold text-slate-900 font-mono">{vulnerabilities.length}</p>
+            <p className="text-lg font-bold text-slate-900 font-mono">{vulnerabilities.length}</p>
           </div>
-          <div className="px-4 py-2.5 rounded-xl bg-rose-50 border border-rose-200 text-center min-w-[80px] shadow-xs">
-            <span className="text-[11px] text-rose-700 font-bold block">High Risk</span>
-            <p className="text-lg font-extrabold text-rose-600 font-mono">
+          <div className="px-4 py-2.5 rounded-lg bg-rose-50 border border-rose-200 text-center min-w-[80px]">
+            <span className="text-[11px] text-rose-700 font-medium block">High Risk</span>
+            <p className="text-lg font-bold text-rose-600 font-mono">
               {vulnerabilities.filter((v) => v.severity === 'High').length}
             </p>
           </div>
-          <div className="px-4 py-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-center min-w-[80px] shadow-xs">
-            <span className="text-[11px] text-emerald-700 font-bold block">Resolved</span>
-            <p className="text-lg font-extrabold text-emerald-600 font-mono">
+          <div className="px-4 py-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-center min-w-[80px]">
+            <span className="text-[11px] text-emerald-700 font-medium block">Resolved</span>
+            <p className="text-lg font-bold text-emerald-600 font-mono">
               {vulnerabilities.filter((v) => v.status === 'Resolved').length}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Comprehensive Filter Bar (Crisp White Card) */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+      {/* Filter Toolbar */}
+      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3.5">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {/* Search Input */}
           <div className="md:col-span-2 relative">
@@ -119,14 +109,14 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Cari celah (judul, parameter URL, CWE, kategori, payload)..."
-              className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-9 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-all font-sans shadow-xs"
+              className="w-full bg-white border border-slate-300 rounded-lg pl-10 pr-9 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 font-sans shadow-xs"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-3 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4" />
               </button>
             )}
           </div>
@@ -136,7 +126,7 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
             <select
               value={selectedSubdomain}
               onChange={(e) => setSelectedSubdomain(e.target.value)}
-              className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-blue-500 font-mono shadow-xs font-medium"
+              className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-500 font-mono shadow-xs font-medium"
             >
               <option value="ALL">Semua Subdomain ({vulnerabilities.length})</option>
               {subdomains.map((sub) => (
@@ -152,9 +142,9 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-blue-500 shadow-xs font-medium"
+              className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-500 shadow-xs font-medium"
             >
-              <option value="ALL">Semua OWASP Top 10:2021</option>
+              <option value="ALL">Semua Kategori OWASP</option>
               {Object.entries(categories).map(([code, info]) => (
                 <option key={code} value={code}>
                   {code} - {info.name}
@@ -168,15 +158,14 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
           {/* Severity Badges Filter */}
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-xs font-bold text-slate-600 mr-1 flex items-center gap-1">
-              <Filter className="w-3 h-3 text-blue-600" />
+            <span className="text-xs font-semibold text-slate-600 mr-1">
               Severity:
             </span>
             {[
               { id: 'ALL', label: 'Semua', count: vulnerabilities.length },
               { id: 'High', label: 'High', count: vulnerabilities.filter((v) => v.severity === 'High').length, color: 'text-rose-600' },
               { id: 'Medium', label: 'Medium', count: vulnerabilities.filter((v) => v.severity === 'Medium').length, color: 'text-amber-600' },
-              { id: 'Low', label: 'Low', count: vulnerabilities.filter((v) => v.severity === 'Low').length, color: 'text-sky-600' },
+              { id: 'Low', label: 'Low', count: vulnerabilities.filter((v) => v.severity === 'Low').length, color: 'text-blue-600' },
               { id: 'Informational', label: 'Info', count: vulnerabilities.filter((v) => v.severity === 'Informational').length, color: 'text-slate-600' },
             ].map((sev) => {
               const active = selectedSeverity === sev.id;
@@ -184,7 +173,7 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                 <button
                   key={sev.id}
                   onClick={() => setSelectedSeverity(sev.id)}
-                  className={`px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
                     active
                       ? 'bg-blue-600 text-white shadow-xs'
                       : 'bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200'
@@ -201,7 +190,7 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
 
           {/* Status Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-slate-600">Status:</span>
+            <span className="text-xs font-semibold text-slate-600">Status:</span>
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
@@ -217,7 +206,7 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
             {hasActiveFilters && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs text-blue-600 hover:text-blue-800 font-bold ml-2 underline underline-offset-2 transition-colors"
+                className="text-xs text-blue-600 hover:text-blue-800 font-medium ml-2 underline underline-offset-2 transition-colors"
               >
                 Reset Filter
               </button>
@@ -226,18 +215,17 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
         </div>
       </div>
 
-      {/* Vulnerabilities List (Crisp White Cards with Rich Borders) */}
+      {/* Vulnerabilities List */}
       <div className="space-y-3">
         {filtered.length === 0 ? (
-          <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center space-y-3 shadow-sm">
-            <AlertCircle className="w-8 h-8 text-slate-400 mx-auto" />
-            <h3 className="text-sm font-bold text-slate-900">Tidak ada kerentanan yang cocok</h3>
+          <div className="bg-white border border-slate-200 rounded-xl p-12 text-center space-y-3 shadow-xs">
+            <h3 className="text-sm font-semibold text-slate-900">Tidak ada kerentanan yang cocok</h3>
             <p className="text-xs text-slate-500 max-w-sm mx-auto">
               Tidak ditemukan temuan yang memenuhi kriteria pencarian atau filter yang dipilih.
             </p>
             <button
               onClick={handleResetFilters}
-              className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold shadow-sm hover:bg-blue-700 transition-all"
+              className="px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold shadow-xs hover:bg-blue-700 transition-all"
             >
               Tampilkan Semua Temuan
             </button>
@@ -246,30 +234,30 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
           filtered.map((vuln) => (
             <div
               key={vuln.id}
-              className="group bg-white hover:bg-slate-50/50 border border-slate-200 hover:border-blue-400 rounded-2xl p-5 shadow-sm transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4"
+              className="group bg-white hover:border-slate-300 border border-slate-200 rounded-xl p-5 shadow-xs transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
             >
               {/* Left Column: Details */}
               <div className="space-y-2 flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200">
+                  <span className="font-mono text-xs font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                     {vuln.id}
                   </span>
 
                   {/* Severity Badge */}
-                  <span className={`text-xs font-bold px-2.5 py-0.5 rounded-md ${
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
                     vuln.severity === 'High' ? 'bg-rose-50 text-rose-700 border border-rose-200' :
                     vuln.severity === 'Medium' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
-                    vuln.severity === 'Low' ? 'bg-sky-50 text-sky-700 border border-sky-200' :
+                    vuln.severity === 'Low' ? 'bg-blue-50 text-blue-700 border border-blue-200' :
                     'bg-slate-100 text-slate-700 border border-slate-200'
                   }`}>
-                    {vuln.severity} Risk &bull; CVSS {vuln.cvss}
+                    {vuln.severity} &bull; CVSS {vuln.cvss}
                   </span>
 
-                  <span className="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md font-mono border border-slate-200 font-semibold">
+                  <span className="text-xs bg-slate-50 text-slate-600 px-2 py-0.5 rounded font-mono border border-slate-200">
                     {vuln.owaspCategory}: {vuln.owaspName}
                   </span>
 
-                  <span className="text-xs text-slate-500 font-mono">
+                  <span className="text-xs text-slate-400 font-mono">
                     {vuln.sprint}
                   </span>
                 </div>
@@ -277,26 +265,26 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                 {/* Title */}
                 <h3 
                   onClick={() => onSelectVulnerability(vuln)}
-                  className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer"
+                  className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer"
                 >
                   {vuln.title}
                 </h3>
 
-                {/* Endpoint & Standard */}
-                <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs font-mono text-slate-600">
+                {/* Endpoint & CWE */}
+                <div className="flex flex-wrap items-center gap-y-1 gap-x-3 text-xs font-mono text-slate-500">
                   <span>
-                    Endpoint: <strong className="text-slate-800 font-semibold">{vuln.target}</strong>
+                    Endpoint: <strong className="text-slate-700 font-medium">{vuln.target}</strong>
                   </span>
                   <span className="text-slate-300 hidden sm:inline">&bull;</span>
-                  <span className="text-slate-600 truncate max-w-sm">
+                  <span className="truncate max-w-sm">
                     {vuln.cwe}
                   </span>
                 </div>
 
                 {/* Assigned To & Detect info */}
-                <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500 pt-1">
+                <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500 pt-0.5">
                   <span>
-                    PIC Tim: <span className="text-slate-800 font-semibold">{vuln.assignedTo}</span>
+                    PIC: <span className="text-slate-700 font-medium">{vuln.assignedTo}</span>
                   </span>
                   <span className="text-slate-300">&bull;</span>
                   <span>
@@ -312,14 +300,14 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                   <select
                     value={vuln.status}
                     onChange={(e) => onQuickStatusChange(vuln.id, e.target.value as Status)}
-                    className={`text-xs font-bold px-3 py-1.5 rounded-xl border focus:outline-none transition-all ${
+                    className={`text-xs font-semibold px-2.5 py-1.5 rounded-lg border focus:outline-none transition-all ${
                       vuln.status === 'Resolved'
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                         : vuln.status === 'In Progress'
-                        ? 'bg-amber-50 text-amber-800 border-amber-300'
+                        ? 'bg-amber-50 text-amber-800 border-amber-200'
                         : vuln.status === 'False Positive'
                         ? 'bg-slate-100 text-slate-700 border-slate-300'
-                        : 'bg-rose-50 text-rose-800 border-rose-300'
+                        : 'bg-rose-50 text-rose-800 border-rose-200'
                     }`}
                   >
                     <option value="Open">Status: Open</option>
@@ -332,11 +320,9 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                 {/* Detail & Blueprint Button */}
                 <button
                   onClick={() => onSelectVulnerability(vuln)}
-                  className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm shadow-blue-500/20 flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-95"
+                  className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-xs transition-all"
                 >
-                  <FileCode className="w-3.5 h-3.5" />
-                  <span>Blueprint Remediasi</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
+                  Blueprint Remediasi &rarr;
                 </button>
               </div>
             </div>

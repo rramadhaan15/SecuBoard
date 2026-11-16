@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { FileText } from 'lucide-react';
 import { Header } from './components/Header';
 import { OverviewView } from './components/OverviewView';
 import { ContinuousScannerView } from './components/ContinuousScannerView';
@@ -252,10 +251,9 @@ export const App: React.FC = () => {
 
         {activeTab === 'report' && (
           <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
               <div>
-                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-blue-600" />
+                <h3 className="text-base font-bold text-slate-900">
                   Laporan Hasil Pengujian &amp; Dokumen Audit TA
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
@@ -264,12 +262,12 @@ export const App: React.FC = () => {
               </div>
               <button
                 onClick={() => setShowReportModal(true)}
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-95 shrink-0"
+                className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition-all shrink-0"
               >
                 Buka Pratinjau Dokumen Cetak
               </button>
             </div>
-            <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center space-y-3 shadow-xs">
+            <div className="bg-white border border-slate-200 rounded-xl p-8 text-center space-y-3 shadow-xs">
               <p className="text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
                 Klik tombol di atas untuk membuka dokumen laporan komprehensif lengkap dengan kop resmi Universitas Pembangunan Nasional &quot;Veteran&quot; Jakarta, tabel temuan kerentanan OWASP Top 10, rekomendasi patch teknis, dan lembar tanda tangan pengesahan.
               </p>
