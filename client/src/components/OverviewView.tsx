@@ -27,7 +27,6 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   vulnerabilities,
   onSelectVulnerability,
   onNavigateToTab,
-  onStartScan,
 }) => {
   if (!metrics) {
     return (
@@ -40,7 +39,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
     );
   }
 
-  // OWASP Chart Data (Strictly clean professional palette: Red, Orange, Amber, Blue, Teal, Emerald, Slate)
+  // OWASP Chart Data (Strictly clean professional palette)
   const owaspChartData = Object.entries(metrics.owaspDistribution).map(([code, count]) => {
     const info = categories[code];
     let color = '#2563eb'; // Default blue
@@ -85,129 +84,133 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Clean Page Header (No Tacky Gradient or Sparkles) */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="space-y-1">
+      {/* Page Header: Clear, high contrast, easy to read */}
+      <div className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="space-y-1.5">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
               Executive BI Dashboard
             </span>
-            <span className="text-xs text-slate-500 font-mono">
-              Pembaruan Terakhir: {new Date(metrics.lastScanTime).toLocaleTimeString('id-ID')} WIB
+            <span className="text-xs text-slate-500 font-medium">
+              Update Terakhir: {new Date(metrics.lastScanTime).toLocaleTimeString('id-ID')} WIB
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-            Postur Keamanan Siber Portal Berita PT Republika Media Mandiri
+            Postur Keamanan Siber Portal PT Republika Media Mandiri
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
-            Pemantauan kerentanan terstandar OWASP Top 10:2021 dan evaluasi kepatuhan SLA mitigasi untuk seluruh aset digital Republika.
+          <p className="text-sm text-slate-600 max-w-3xl leading-relaxed">
+            Evaluasi kepatuhan kerentanan terstandar OWASP Top 10:2021 dan pemantauan SLA mitigasi untuk seluruh domain aset digital Republika.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => onNavigateToTab('scanner')}
-            className="px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition-colors"
+            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition-colors shadow-xs"
           >
             Konsol Scanner
           </button>
           <button
             onClick={() => onNavigateToTab('vulnerabilities')}
-            className="px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-medium text-xs transition-colors"
+            className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium text-xs transition-colors border border-slate-300"
           >
             Semua Temuan ({metrics.totalFindings})
           </button>
         </div>
       </div>
 
-      {/* Row 1: KPI Summary Cards (Clean Minimalist Analytics Style, No Icons) */}
+      {/* Row 1: KPI Summary Cards - Clean, high contrast, readable numbers */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {/* Card 1: Security Posture Score */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-medium text-slate-500 uppercase tracking-wider block">
-              Security Score
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+              Skor Keamanan
             </span>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-bold text-slate-900 font-mono tracking-tight">{metrics.postureScore}</span>
-              <span className="text-xs text-slate-400">/ 100</span>
-              <span className="ml-auto text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span className="text-3xl font-extrabold text-slate-900 font-mono tracking-tight">
+                {metrics.postureScore}
+              </span>
+              <span className="text-xs text-slate-400 font-medium">/ 100</span>
+              <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                 Grade {metrics.securityGrade}
               </span>
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span className="text-slate-500">Resolusi Temuan:</span>
-            <span className="font-semibold text-emerald-600">{metrics.resolutionRate}% Selesai</span>
+            <span className="text-slate-500">Tingkat Resolusi:</span>
+            <span className="font-bold text-emerald-600">{metrics.resolutionRate}% Selesai</span>
           </div>
         </div>
 
         {/* Card 2: High Severity */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-medium text-rose-700 uppercase tracking-wider block">
-              High Risk (Kritis)
+            <span className="text-xs font-bold text-rose-700 uppercase tracking-wider block">
+              Risiko Tinggi (High)
             </span>
-            <div className="text-3xl font-bold text-rose-600 mt-2 font-mono tracking-tight">
+            <div className="text-3xl font-extrabold text-rose-600 mt-2 font-mono tracking-tight">
               {metrics.severityCounts.high}
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Batas SLA:</span>
-            <span className="font-semibold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200">
+            <span>Batas Waktu SLA:</span>
+            <span className="font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
               &lt; 24 Jam
             </span>
           </div>
         </div>
 
         {/* Card 3: Medium Severity */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-medium text-amber-700 uppercase tracking-wider block">
-              Medium Risk
+            <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block">
+              Risiko Sedang (Medium)
             </span>
-            <div className="text-3xl font-bold text-amber-600 mt-2 font-mono tracking-tight">
+            <div className="text-3xl font-extrabold text-amber-600 mt-2 font-mono tracking-tight">
               {metrics.severityCounts.medium}
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Batas SLA:</span>
-            <span className="font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
+            <span>Batas Waktu SLA:</span>
+            <span className="font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
               &lt; 72 Jam
             </span>
           </div>
         </div>
 
         {/* Card 4: Low & Info */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-medium text-slate-600 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block">
               Low &amp; Hardening
             </span>
-            <div className="text-3xl font-bold text-slate-800 mt-2 font-mono tracking-tight">
+            <div className="text-3xl font-extrabold text-slate-800 mt-2 font-mono tracking-tight">
               {metrics.severityCounts.low + metrics.severityCounts.info}
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Fokus:</span>
-            <span className="font-medium text-slate-700">Security Headers</span>
+            <span>Fokus Perbaikan:</span>
+            <span className="font-semibold text-slate-700">Security Headers</span>
           </div>
         </div>
 
         {/* Card 5: MTTR & SLA Compliance */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-medium text-slate-600 uppercase tracking-wider block">
-              MTTR Respon
+            <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block">
+              Rata-rata Respon (MTTR)
             </span>
             <div className="flex items-baseline gap-1 mt-2">
-              <span className="text-3xl font-bold text-slate-900 font-mono tracking-tight">{metrics.mttrHours}</span>
+              <span className="text-3xl font-extrabold text-slate-900 font-mono tracking-tight">
+                {metrics.mttrHours}
+              </span>
               <span className="text-xs text-slate-500 font-medium">Jam</span>
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
             <span>Kepatuhan SLA:</span>
-            <span className="font-semibold text-emerald-600">{metrics.slaComplianceRate}% Target</span>
+            <span className="font-bold text-emerald-600">{metrics.slaComplianceRate}% Target</span>
           </div>
         </div>
       </div>
@@ -215,48 +218,49 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
       {/* Row 2: Charts (OWASP Top 10 Distribution + CIA Triad Matrix) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* OWASP Top 10:2021 Distribution */}
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-2 bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-2">
               <div>
-                <h2 className="text-sm font-bold text-slate-900">
+                <h2 className="text-base font-bold text-slate-900">
                   Distribusi Kerentanan Berdasarkan OWASP Top 10:2021
                 </h2>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Klasifikasi risiko internasional sesuai standar penelitian Bab 2.1.4
+                  Klasifikasi risiko internasional sesuai standar pengujian Bab 2.1.4
                 </p>
               </div>
-              <span className="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium self-start sm:self-auto border border-slate-200">
-                {owaspChartData.length} Kategori Terdeteksi
+              <span className="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded font-semibold self-start sm:self-auto border border-slate-200">
+                {owaspChartData.length} Kategori Ditemukan
               </span>
             </div>
 
-            <div className="h-64 w-full mt-4">
+            <div className="h-72 w-full mt-4">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={owaspChartData}
                   layout="vertical"
-                  margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
+                  margin={{ top: 5, right: 30, left: 45, bottom: 5 }}
                 >
-                  <XAxis type="number" stroke="#94a3b8" fontSize={11} allowDecimals={false} />
+                  <XAxis type="number" stroke="#64748b" fontSize={12} allowDecimals={false} />
                   <YAxis 
                     dataKey="code" 
                     type="category" 
-                    stroke="#475569" 
-                    fontSize={11} 
+                    stroke="#334155" 
+                    fontSize={12} 
+                    fontWeight={600}
                     tickLine={false} 
-                    width={75}
+                    width={80}
                   />
                   <Tooltip
-                    cursor={{ fill: 'rgba(241, 245, 249, 0.6)' }}
+                    cursor={{ fill: 'rgba(241, 245, 249, 0.7)' }}
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="bg-white border border-slate-200 p-2.5 rounded-lg shadow-md text-xs space-y-1">
+                          <div className="bg-white border border-slate-200 p-3 rounded-lg shadow-lg text-xs space-y-1">
                             <p className="font-bold text-slate-900">{data.name}</p>
                             <p className="text-slate-600">{data.nameId}</p>
-                            <p className="text-blue-600 font-semibold">{data.count} Temuan</p>
+                            <p className="text-blue-700 font-bold">{data.count} Temuan</p>
                           </div>
                         );
                       }
@@ -276,18 +280,18 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2 text-xs">
             {owaspChartData.map((item) => (
               <span key={item.code} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-50 border border-slate-200 text-slate-700">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></span>
-                <strong className="text-slate-900">{item.code}:</strong> {item.count}
+                <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: item.color }}></span>
+                <strong className="text-slate-900 font-mono">{item.code}:</strong> {item.count}
               </span>
             ))}
           </div>
         </div>
 
         {/* CIA Triad Impact Matrix */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs flex flex-col justify-between">
           <div>
             <div className="pb-3 border-b border-slate-100">
-              <h2 className="text-sm font-bold text-slate-900">
+              <h2 className="text-base font-bold text-slate-900">
                 Dampak CIA Triad
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -295,7 +299,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </p>
             </div>
 
-            <div className="h-44 w-full mt-2">
+            <div className="h-48 w-full mt-2">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -304,9 +308,9 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                     nameKey="name"
                     cx="50%"
                     cy="50%"
-                    innerRadius={45}
-                    outerRadius={70}
-                    paddingAngle={3}
+                    innerRadius={50}
+                    outerRadius={75}
+                    paddingAngle={4}
                   >
                     {ciaData.map((entry, index) => (
                       <Cell key={`pie-cell-${index}`} fill={entry.color} />
@@ -317,9 +321,9 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                       if (active && payload && payload.length) {
                         const data = payload[0];
                         return (
-                          <div className="bg-white border border-slate-200 p-2 rounded shadow-md text-xs">
+                          <div className="bg-white border border-slate-200 p-2.5 rounded shadow-lg text-xs">
                             <p className="font-semibold text-slate-900">{data.name}</p>
-                            <p className="text-blue-600 font-bold">{data.value} Kerentanan Terkait</p>
+                            <p className="text-blue-700 font-bold">{data.value} Kerentanan Terkait</p>
                           </div>
                         );
                       }
@@ -330,35 +334,35 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </ResponsiveContainer>
             </div>
 
-            <div className="space-y-1.5 mt-2">
-              <div className="flex items-center justify-between text-xs p-2 rounded bg-slate-50 border border-slate-100">
+            <div className="space-y-2 mt-2">
+              <div className="flex items-center justify-between text-xs p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-sky-600"></span>
-                  <span className="text-slate-700">Confidentiality (Kerahasiaan)</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-sky-600 shrink-0"></span>
+                  <span className="text-slate-700 font-medium">Confidentiality (Kerahasiaan)</span>
                 </div>
                 <span className="font-bold text-slate-900 font-mono">{metrics.ciaTriad.confidentiality}</span>
               </div>
 
-              <div className="flex items-center justify-between text-xs p-2 rounded bg-slate-50 border border-slate-100">
+              <div className="flex items-center justify-between text-xs p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
-                  <span className="text-slate-700">Integrity (Integritas Berita)</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0"></span>
+                  <span className="text-slate-700 font-medium">Integrity (Integritas Berita)</span>
                 </div>
                 <span className="font-bold text-slate-900 font-mono">{metrics.ciaTriad.integrity}</span>
               </div>
 
-              <div className="flex items-center justify-between text-xs p-2 rounded bg-slate-50 border border-slate-100">
+              <div className="flex items-center justify-between text-xs p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-amber-600"></span>
-                  <span className="text-slate-700">Availability (Ketersediaan Portal)</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-600 shrink-0"></span>
+                  <span className="text-slate-700 font-medium">Availability (Ketersediaan Portal)</span>
                 </div>
                 <span className="font-bold text-slate-900 font-mono">{metrics.ciaTriad.availability}</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-3 pt-2.5 border-t border-slate-100 text-[11px] text-slate-500 leading-snug">
-            *Integritas sangat krusial bagi Republika untuk menjamin konten berita bebas dari manipulasi atau hoaks publik.
+          <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 leading-relaxed">
+            *Integritas berita merupakan pilar paling esensial bagi Republika untuk menjaga orisinalitas pers dari risiko manipulasi artikel atau injeksi konten ilegal.
           </div>
         </div>
       </div>
@@ -366,102 +370,102 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
       {/* Row 3: Attack Surface + Actionable Top Priority Remediations */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Attack Surface by Subdomain */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-3">
+        <div className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs space-y-3">
           <div>
-            <h2 className="text-sm font-bold text-slate-900">
+            <h2 className="text-base font-bold text-slate-900">
               Attack Surface: Aset Domain Republika
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Pemetaan ruang lingkup pengujian (Scope of Testing)
+              Pemetaan cakupan pengujian (Scope of Testing)
             </p>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 pt-1">
             {Object.entries(metrics.subdomainCounts).map(([subdomain, count]) => (
               <div 
                 key={subdomain} 
-                className="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100/70 transition-colors flex items-center justify-between"
+                className="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100/80 transition-colors flex items-center justify-between"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    <span className="text-xs font-semibold text-slate-900 font-mono">{subdomain}</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                    <span className="text-xs font-bold text-slate-900 font-mono">{subdomain}</span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">{getSubdomainLabel(subdomain)}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{getSubdomainLabel(subdomain)}</p>
                 </div>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-white text-slate-700 border border-slate-200 font-mono">
+                <span className="text-xs font-bold px-2.5 py-1 rounded bg-white text-slate-700 border border-slate-200 font-mono shadow-2xs">
                   {count} Temuan
                 </span>
               </div>
             ))}
           </div>
 
-          <div className="pt-2 text-[11px] text-slate-500 flex items-center justify-between border-t border-slate-100">
-            <span>Metode: Spidering &amp; Passive Scan</span>
-            <span className="font-medium text-slate-700">5 Subdomain Aktif</span>
+          <div className="pt-3 text-xs text-slate-500 flex items-center justify-between border-t border-slate-100">
+            <span>Metode: Spider &amp; Passive Scan</span>
+            <span className="font-semibold text-slate-800">5 Subdomain Aktif</span>
           </div>
         </div>
 
         {/* Actionable Top Priority Remediations */}
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-3">
+        <div className="lg:col-span-2 bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs space-y-3">
           <div className="flex items-center justify-between pb-3 border-b border-slate-100">
             <div>
-              <h2 className="text-sm font-bold text-slate-900">
+              <h2 className="text-base font-bold text-slate-900">
                 Prioritas Mitigasi Segera (Actionable Remediations)
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
-                Temuan risiko tinggi yang memerlukan penanganan teknis secepatnya
+                Temuan risiko tinggi yang membutuhkan penanganan teknis prioritas
               </p>
             </div>
             <button
               onClick={() => onNavigateToTab('vulnerabilities')}
-              className="text-xs text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+              className="text-xs text-blue-600 hover:text-blue-800 font-bold transition-colors"
             >
               Lihat Semua Temuan &rarr;
             </button>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-3 pt-1">
             {highPriority.map((vuln) => (
               <div
                 key={vuln.id}
                 onClick={() => onSelectVulnerability(vuln)}
-                className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 hover:bg-white transition-colors cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-white transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
               >
-                <div className="space-y-1 flex-1 min-w-0">
+                <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[11px] font-semibold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
+                    <span className="font-mono text-xs font-bold text-slate-800 bg-white px-2 py-0.5 rounded border border-slate-200">
                       {vuln.id}
                     </span>
-                    <span className={`text-[11px] font-semibold px-2 py-0.5 rounded ${
+                    <span className={`text-xs font-bold px-2.5 py-0.5 rounded ${
                       vuln.severity === 'High' 
                         ? 'bg-rose-50 text-rose-700 border border-rose-200' 
                         : 'bg-amber-50 text-amber-700 border border-amber-200'
                     }`}>
                       {vuln.severity} (CVSS {vuln.cvss})
                     </span>
-                    <span className="text-[11px] text-slate-500 font-mono">
+                    <span className="text-xs text-slate-600 font-mono font-medium">
                       {vuln.owaspCategory}: {vuln.owaspName}
                     </span>
                   </div>
-                  <h3 className="text-xs sm:text-sm font-semibold text-slate-900 truncate">
+                  <h3 className="text-sm font-bold text-slate-900 truncate">
                     {vuln.title}
                   </h3>
-                  <p className="text-[11px] text-slate-500 font-mono truncate">
-                    Endpoint: {vuln.target}
+                  <p className="text-xs text-slate-600 font-mono truncate">
+                    Endpoint: <span className="font-semibold text-slate-800">{vuln.target}</span>
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-center">
-                  <span className={`text-[11px] font-medium px-2 py-0.5 rounded ${
+                <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded ${
                     vuln.status === 'Resolved' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
                     vuln.status === 'In Progress' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
                     'bg-rose-50 text-rose-700 border border-rose-200'
                   }`}>
                     {vuln.status}
                   </span>
-                  <button className="px-3 py-1.5 rounded-md bg-white hover:bg-slate-50 text-blue-700 font-medium text-xs border border-slate-300 transition-colors">
-                    Detail Mitigasi
+                  <button className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-xs transition-colors">
+                    Detail Mitigasi &rarr;
                   </button>
                 </div>
               </div>
