@@ -293,21 +293,21 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                 </div>
               </div>
 
-              {/* Right Column: Status Selector & Action Buttons */}
-              <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-3 shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100">
+              {/* Right Column: Status Selector & Action Buttons (Uniform Width & Height) */}
+              <div className="flex flex-col items-stretch sm:items-end justify-center gap-2 shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 w-full sm:w-auto">
                 {/* Status Selector Dropdown */}
-                <div className="flex items-center gap-1.5">
+                <div className="w-full sm:w-48">
                   <select
                     value={vuln.status}
                     onChange={(e) => onQuickStatusChange(vuln.id, e.target.value as Status)}
-                    className={`text-xs font-bold px-3 py-1.5 rounded-lg border focus:outline-none transition-all ${
+                    className={`w-full h-9 text-xs font-bold px-3 rounded-lg border focus:outline-none transition-all cursor-pointer ${
                       vuln.status === 'Resolved'
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                        ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100/70'
                         : vuln.status === 'In Progress'
-                        ? 'bg-amber-50 text-amber-800 border-amber-300'
+                        ? 'bg-amber-50 text-amber-800 border-amber-300 hover:bg-amber-100/70'
                         : vuln.status === 'False Positive'
-                        ? 'bg-slate-100 text-slate-700 border-slate-300'
-                        : 'bg-rose-50 text-rose-800 border-rose-300'
+                        ? 'bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200/70'
+                        : 'bg-rose-50 text-rose-800 border-rose-300 hover:bg-rose-100/70'
                     }`}
                   >
                     <option value="Open">Status: Open</option>
@@ -320,9 +320,10 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                 {/* Detail & Blueprint Button */}
                 <button
                   onClick={() => onSelectVulnerability(vuln)}
-                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition-all whitespace-nowrap"
+                  className="w-full sm:w-48 h-9 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition-all flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer"
                 >
-                  Blueprint Remediasi &rarr;
+                  <span>Blueprint Remediasi</span>
+                  <span>&rarr;</span>
                 </button>
               </div>
             </div>

@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* ZAP Status Button */}
             <button
               onClick={onOpenZapConfig}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
+              className={`h-9 flex items-center gap-2 px-3.5 rounded-lg text-xs font-semibold border transition-colors ${
                 zapConnected
                   ? 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100'
                   : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
@@ -72,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Continuous Mode Toggle */}
             <button
               onClick={onToggleContinuous}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+              className={`h-9 px-3.5 rounded-lg text-xs font-semibold border transition-colors ${
                 isContinuous
                   ? 'bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700'
                   : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
@@ -85,14 +85,14 @@ export const Header: React.FC<HeaderProps> = ({
             {isScanning ? (
               <button
                 onClick={onStopScan}
-                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition-colors"
+                className="h-9 px-4 rounded-lg text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition-colors flex items-center justify-center"
               >
                 Hentikan Scan
               </button>
             ) : (
               <button
                 onClick={onStartScan}
-                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-colors shadow-xs"
+                className="h-9 px-4 rounded-lg text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-colors shadow-xs flex items-center justify-center"
               >
                 Scan Sekarang
               </button>
