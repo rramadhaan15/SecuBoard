@@ -36,49 +36,20 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
-      {/* Top Academic & Case Study Context Bar */}
-      <div className="bg-slate-50 border-b border-slate-200/80 px-4 sm:px-8 py-2 text-xs text-slate-600">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <span className="font-semibold text-slate-800">
-              Tugas Akhir DIII Sistem Informasi &bull; FIK UPN &ldquo;Veteran&rdquo; Jakarta 2026
-            </span>
-            <span className="text-slate-300 hidden sm:inline">|</span>
-            <span className="hidden sm:inline">
-              Peneliti: <span className="font-medium text-slate-800">Rizki Ramadhan</span> (NIM: 2410501091)
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span>
-              Target: <strong className="font-medium text-slate-800">PT Republika Media Mandiri (republika.co.id)</strong>
-            </span>
-            <a
-              href="https://www.republika.co.id"
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 hover:text-blue-800 transition-colors font-medium hover:underline text-[11px]"
-            >
-              Kunjungi Portal &rarr;
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main App Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo & App Title */}
           <div className="flex items-center gap-3">
             <div className="flex items-baseline gap-2">
-              <span className="text-xl font-bold tracking-tight text-slate-900">
+              <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 font-sans">
                 Secu<span className="text-blue-600">Board</span>
               </span>
-              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+              <span className="text-xs font-bold text-slate-600 uppercase tracking-wide bg-slate-100 px-2 py-0.5 rounded border border-slate-200 font-mono">
                 OWASP ZAP BI
               </span>
             </div>
-            <span className="text-xs text-slate-400 hidden md:inline">
+            <span className="text-xs font-medium text-slate-500 hidden md:inline">
               Continuous Web Vulnerability Intelligence
             </span>
           </div>
@@ -88,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* ZAP Status Button */}
             <button
               onClick={onOpenZapConfig}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
                 zapConnected
                   ? 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100'
                   : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
@@ -145,15 +116,15 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`py-3 px-3 text-xs sm:text-sm font-medium border-b-2 whitespace-nowrap transition-colors flex items-center gap-2 ${
+                className={`py-3 px-3.5 text-xs sm:text-sm font-semibold border-b-2 whitespace-nowrap transition-colors flex items-center gap-2 ${
                   isActive
-                    ? 'border-blue-600 text-blue-600 font-semibold'
+                    ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
                 }`}
               >
                 <span>{tab.label}</span>
                 {tab.badge && (
-                  <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-blue-100 text-blue-700">
+                  <span className="px-1.5 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-700 font-mono">
                     {tab.badge}
                   </span>
                 )}

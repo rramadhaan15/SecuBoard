@@ -314,29 +314,29 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
             </div>
 
             {/* Terminal Body: Highly readable monospaced logs */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-1.5 font-mono text-xs text-slate-100 leading-relaxed">
+            <div className="flex-1 p-4 overflow-y-auto space-y-1.5 font-mono text-xs sm:text-[12.5px] text-slate-100 leading-relaxed">
               {logs.length === 0 ? (
-                <div className="text-slate-500 italic py-10 text-center">
+                <div className="text-slate-500 italic py-10 text-center font-sans text-xs">
                   Menunggu telemetri scanner aktif...
                 </div>
               ) : (
                 logs.map((log) => {
-                  let badgeColor = 'text-cyan-300 bg-cyan-950/90 border-cyan-800';
-                  if (log.level === 'WARN') badgeColor = 'text-amber-300 bg-amber-950/90 border-amber-800';
-                  if (log.level === 'DANGER') badgeColor = 'text-rose-300 bg-rose-950/90 border-rose-800 font-bold';
-                  if (log.level === 'SUCCESS') badgeColor = 'text-emerald-300 bg-emerald-950/90 border-emerald-800';
-                  if (log.level === 'ACTIVE') badgeColor = 'text-blue-300 bg-blue-950/90 border-blue-800 font-bold';
-                  if (log.level === 'SPIDER' || log.level === 'PASSIVE') badgeColor = 'text-sky-300 bg-sky-950/90 border-sky-800';
+                  let badgeColor = 'text-cyan-300 bg-cyan-950/90 border-cyan-700';
+                  if (log.level === 'WARN') badgeColor = 'text-amber-300 bg-amber-950/90 border-amber-700';
+                  if (log.level === 'DANGER') badgeColor = 'text-rose-300 bg-rose-950/90 border-rose-700 font-bold';
+                  if (log.level === 'SUCCESS') badgeColor = 'text-emerald-300 bg-emerald-950/90 border-emerald-700';
+                  if (log.level === 'ACTIVE') badgeColor = 'text-blue-300 bg-blue-950/90 border-blue-700 font-bold';
+                  if (log.level === 'SPIDER' || log.level === 'PASSIVE') badgeColor = 'text-sky-300 bg-sky-950/90 border-sky-700';
 
                   return (
-                    <div key={log.id} className="flex items-start gap-2.5 hover:bg-white/[0.04] px-1.5 py-0.5 rounded">
+                    <div key={log.id} className="flex items-start gap-2.5 hover:bg-white/[0.05] px-2 py-1 rounded transition-colors">
                       <span className="text-slate-400 text-xs shrink-0 select-none">
                         [{new Date(log.timestamp).toLocaleTimeString('id-ID')}]
                       </span>
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded border font-semibold shrink-0 ${badgeColor}`}>
+                      <span className={`text-[11px] px-1.5 py-0.5 rounded border font-semibold shrink-0 tracking-wide ${badgeColor}`}>
                         {log.level}
                       </span>
-                      <span className="text-slate-200 break-all">{log.message}</span>
+                      <span className="text-slate-100 break-all leading-relaxed">{log.message}</span>
                     </div>
                   );
                 })
@@ -351,71 +351,71 @@ export const ContinuousScannerView: React.FC<ContinuousScannerViewProps> = ({
       <div className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div>
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-bold text-slate-900 font-sans">
               Riwayat Pemindaian &amp; Sesi Audit
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-600 mt-0.5">
               Daftar sesi pengujian ZAP yang telah diselesaikan
             </p>
           </div>
-          <span className="text-xs text-slate-600 font-mono font-semibold bg-slate-100 px-2.5 py-1 rounded border border-slate-200">
+          <span className="text-xs text-slate-700 font-mono font-bold bg-slate-100 px-3 py-1 rounded-md border border-slate-200">
             Total: {scanHistory.length} Sesi
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 text-slate-700 uppercase font-mono text-[11px] border-b border-slate-200">
+            <thead className="bg-slate-50 text-slate-700 uppercase font-sans text-xs tracking-wider border-b border-slate-200">
               <tr>
-                <th className="py-3 px-4 font-bold">Waktu Mulai</th>
-                <th className="py-3 px-4 font-bold">Target Endpoint</th>
-                <th className="py-3 px-4 font-bold">Tipe Pemindaian</th>
-                <th className="py-3 px-4 font-bold">Durasi</th>
-                <th className="py-3 px-4 font-bold">Crawled / Requests</th>
-                <th className="py-3 px-4 font-bold">Temuan Alert</th>
-                <th className="py-3 px-4 font-bold">Status</th>
+                <th className="py-3.5 px-4 font-bold">Waktu Mulai</th>
+                <th className="py-3.5 px-4 font-bold">Target Endpoint</th>
+                <th className="py-3.5 px-4 font-bold">Tipe Pemindaian</th>
+                <th className="py-3.5 px-4 font-bold">Durasi</th>
+                <th className="py-3.5 px-4 font-bold">Crawled / Requests</th>
+                <th className="py-3.5 px-4 font-bold">Temuan Alert</th>
+                <th className="py-3.5 px-4 font-bold">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-700 font-mono">
+            <tbody className="divide-y divide-slate-100 text-slate-700 font-mono text-xs">
               {scanHistory.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-slate-400 italic">
+                  <td colSpan={7} className="py-8 text-center text-slate-500 italic font-sans text-xs">
                     Belum ada riwayat pemindaian tersimpan.
                   </td>
                 </tr>
               ) : (
                 scanHistory.map((scan) => (
                   <tr key={scan.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-3 px-4 text-slate-600 whitespace-nowrap">
+                    <td className="py-3.5 px-4 text-slate-600 whitespace-nowrap">
                       {new Date(scan.startTime).toLocaleString('id-ID')}
                     </td>
-                    <td className="py-3 px-4 text-slate-900 font-semibold truncate max-w-xs">
+                    <td className="py-3.5 px-4 text-slate-900 font-semibold truncate max-w-xs">
                       {scan.targetUrl}
                     </td>
-                    <td className="py-3 px-4 text-slate-700 font-sans text-xs">
+                    <td className="py-3.5 px-4 text-slate-700 font-sans text-xs font-medium">
                       {scan.scanType}
                     </td>
-                    <td className="py-3 px-4 text-slate-600">
+                    <td className="py-3.5 px-4 text-slate-700 font-semibold">
                       {scan.duration || 'Running'}
                     </td>
-                    <td className="py-3 px-4 text-slate-700">
+                    <td className="py-3.5 px-4 text-slate-700">
                       {scan.urlsCrawled} / {scan.requestsSent}
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-1.5">
-                        <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold">
+                    <td className="py-3.5 px-4">
+                      <div className="flex items-center gap-1.5 font-mono">
+                        <span className="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
                           {scan.alertsFound.high} H
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold">
                           {scan.alertsFound.medium} M
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold">
                           {scan.alertsFound.low} L
                         </span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <td className="py-3.5 px-4">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 font-sans">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                         Selesai
                       </span>

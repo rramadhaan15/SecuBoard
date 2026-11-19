@@ -16,11 +16,11 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
       <div className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+            <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
               Metodologi Penelitian (Bab 2.1.6 &amp; Bab 3.1)
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-sans">
             Framework Manajemen Pengujian Agile Scrum
           </h2>
           <p className="text-sm text-slate-600 max-w-2xl leading-relaxed">
@@ -30,7 +30,7 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
 
         <div className="flex items-center gap-3 shrink-0">
           <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center min-w-[95px]">
-            <span className="text-xs text-slate-500 block font-medium">Total Sprints</span>
+            <span className="text-xs text-slate-600 block font-semibold">Total Sprints</span>
             <p className="text-xl font-extrabold text-slate-900 font-mono">3 Sprints</p>
           </div>
           <div className="px-4 py-2.5 rounded-xl bg-blue-50 border border-blue-200 text-center min-w-[95px]">

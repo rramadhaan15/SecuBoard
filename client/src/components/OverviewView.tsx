@@ -88,14 +88,14 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
       <div className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+            <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200 tracking-wide">
               Executive BI Dashboard
             </span>
-            <span className="text-xs text-slate-500 font-medium">
+            <span className="text-xs text-slate-600 font-medium">
               Update Terakhir: {new Date(metrics.lastScanTime).toLocaleTimeString('id-ID')} WIB
             </span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-sans">
             Postur Keamanan Siber Portal PT Republika Media Mandiri
           </h1>
           <p className="text-sm text-slate-600 max-w-3xl leading-relaxed">
@@ -106,13 +106,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => onNavigateToTab('scanner')}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition-colors shadow-xs"
+            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors shadow-xs"
           >
             Konsol Scanner
           </button>
           <button
             onClick={() => onNavigateToTab('vulnerabilities')}
-            className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium text-xs transition-colors border border-slate-300"
+            className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs transition-colors border border-slate-300"
           >
             Semua Temuan ({metrics.totalFindings})
           </button>
@@ -124,21 +124,21 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
         {/* Card 1: Security Posture Score */}
         <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-slate-600 uppercase tracking-wide block">
               Skor Keamanan
             </span>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-extrabold text-slate-900 font-mono tracking-tight">
+              <span className="text-3xl font-extrabold text-slate-900 font-mono">
                 {metrics.postureScore}
               </span>
-              <span className="text-xs text-slate-400 font-medium">/ 100</span>
+              <span className="text-xs text-slate-500 font-medium">/ 100</span>
               <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                 Grade {metrics.securityGrade}
               </span>
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span className="text-slate-500">Tingkat Resolusi:</span>
+            <span className="text-slate-600 font-medium">Tingkat Resolusi:</span>
             <span className="font-bold text-emerald-600">{metrics.resolutionRate}% Selesai</span>
           </div>
         </div>
@@ -146,15 +146,15 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
         {/* Card 2: High Severity */}
         <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold text-rose-700 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-rose-700 uppercase tracking-wide block">
               Risiko Tinggi (High)
             </span>
-            <div className="text-3xl font-extrabold text-rose-600 mt-2 font-mono tracking-tight">
+            <div className="text-3xl font-extrabold text-rose-600 mt-2 font-mono">
               {metrics.severityCounts.high}
             </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Batas Waktu SLA:</span>
+          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+            <span className="font-medium">Batas Waktu SLA:</span>
             <span className="font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
               &lt; 24 Jam
             </span>
@@ -164,15 +164,15 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
         {/* Card 3: Medium Severity */}
         <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-amber-700 uppercase tracking-wide block">
               Risiko Sedang (Medium)
             </span>
-            <div className="text-3xl font-extrabold text-amber-600 mt-2 font-mono tracking-tight">
+            <div className="text-3xl font-extrabold text-amber-600 mt-2 font-mono">
               {metrics.severityCounts.medium}
             </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Batas Waktu SLA:</span>
+          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+            <span className="font-medium">Batas Waktu SLA:</span>
             <span className="font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
               &lt; 72 Jam
             </span>
@@ -182,34 +182,34 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
         {/* Card 4: Low & Info */}
         <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-slate-600 uppercase tracking-wide block">
               Low &amp; Hardening
             </span>
-            <div className="text-3xl font-extrabold text-slate-800 mt-2 font-mono tracking-tight">
+            <div className="text-3xl font-extrabold text-slate-800 mt-2 font-mono">
               {metrics.severityCounts.low + metrics.severityCounts.info}
             </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Fokus Perbaikan:</span>
-            <span className="font-semibold text-slate-700">Security Headers</span>
+          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+            <span className="font-medium">Fokus Perbaikan:</span>
+            <span className="font-bold text-slate-800">Security Headers</span>
           </div>
         </div>
 
         {/* Card 5: MTTR & SLA Compliance */}
         <div className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-slate-600 uppercase tracking-wide block">
               Rata-rata Respon (MTTR)
             </span>
             <div className="flex items-baseline gap-1 mt-2">
-              <span className="text-3xl font-extrabold text-slate-900 font-mono tracking-tight">
+              <span className="text-3xl font-extrabold text-slate-900 font-mono">
                 {metrics.mttrHours}
               </span>
               <span className="text-xs text-slate-500 font-medium">Jam</span>
             </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Kepatuhan SLA:</span>
+          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+            <span className="font-medium">Kepatuhan SLA:</span>
             <span className="font-bold text-emerald-600">{metrics.slaComplianceRate}% Target</span>
           </div>
         </div>
@@ -225,11 +225,11 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                 <h2 className="text-base font-bold text-slate-900">
                   Distribusi Kerentanan Berdasarkan OWASP Top 10:2021
                 </h2>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-600 mt-0.5">
                   Klasifikasi risiko internasional sesuai standar pengujian Bab 2.1.4
                 </p>
               </div>
-              <span className="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded font-semibold self-start sm:self-auto border border-slate-200">
+              <span className="text-xs bg-slate-100 text-slate-800 px-3 py-1 rounded-md font-semibold self-start sm:self-auto border border-slate-200 font-mono">
                 {owaspChartData.length} Kategori Ditemukan
               </span>
             </div>
@@ -375,7 +375,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
             <h2 className="text-base font-bold text-slate-900">
               Attack Surface: Aset Domain Republika
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-600 mt-0.5">
               Pemetaan cakupan pengujian (Scope of Testing)
             </p>
           </div>
@@ -391,16 +391,16 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                     <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
                     <span className="text-xs font-bold text-slate-900 font-mono">{subdomain}</span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-0.5">{getSubdomainLabel(subdomain)}</p>
+                  <p className="text-xs text-slate-600 mt-0.5">{getSubdomainLabel(subdomain)}</p>
                 </div>
-                <span className="text-xs font-bold px-2.5 py-1 rounded bg-white text-slate-700 border border-slate-200 font-mono shadow-2xs">
+                <span className="text-xs font-bold px-2.5 py-1 rounded bg-white text-slate-800 border border-slate-200 font-mono shadow-2xs">
                   {count} Temuan
                 </span>
               </div>
             ))}
           </div>
 
-          <div className="pt-3 text-xs text-slate-500 flex items-center justify-between border-t border-slate-100">
+          <div className="pt-3 text-xs text-slate-600 flex items-center justify-between border-t border-slate-100">
             <span>Metode: Spider &amp; Passive Scan</span>
             <span className="font-semibold text-slate-800">5 Subdomain Aktif</span>
           </div>
@@ -413,7 +413,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <h2 className="text-base font-bold text-slate-900">
                 Prioritas Mitigasi Segera (Actionable Remediations)
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5">
                 Temuan risiko tinggi yang membutuhkan penanganan teknis prioritas
               </p>
             </div>
@@ -444,7 +444,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                     }`}>
                       {vuln.severity} (CVSS {vuln.cvss})
                     </span>
-                    <span className="text-xs text-slate-600 font-mono font-medium">
+                    <span className="text-xs text-slate-700 font-mono font-semibold">
                       {vuln.owaspCategory}: {vuln.owaspName}
                     </span>
                   </div>
@@ -464,7 +464,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                   }`}>
                     {vuln.status}
                   </span>
-                  <button className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-xs transition-colors">
+                  <button className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition-colors">
                     Detail Mitigasi &rarr;
                   </button>
                 </div>

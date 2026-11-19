@@ -72,16 +72,16 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
         </div>
 
         {/* Current Status */}
-        <div className={`p-3.5 rounded-lg border text-xs space-y-1.5 ${
+        <div className={`p-4 rounded-xl border text-xs space-y-1.5 ${
           config.connected 
             ? 'bg-emerald-50 border-emerald-200 text-emerald-800' 
             : 'bg-slate-50 border-slate-200 text-slate-700'
         }`}>
-          <div className="font-semibold text-slate-900 flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${config.connected ? 'bg-emerald-500' : 'bg-blue-600'}`}></span>
+          <div className="font-bold text-slate-900 flex items-center gap-2">
+            <span className={`w-2.5 h-2.5 rounded-full ${config.connected ? 'bg-emerald-500' : 'bg-blue-600'}`}></span>
             <span>Status: {config.connected ? 'Terhubung ke OWASP ZAP Daemon' : 'Autonomous Engine Bawaan Aktif'}</span>
           </div>
-          <p className="text-slate-500 leading-relaxed text-[11px]">
+          <p className="text-slate-600 leading-relaxed text-xs">
             {config.connected
               ? `Versi ZAP: ${config.version} (Port ${config.port})`
               : 'Dashboard dapat berjalan mandiri menggunakan autonomous engine bawaan atau dikoneksikan ke desktop ZAP via port 8080.'}
@@ -91,7 +91,7 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
         {/* Form */}
         <form onSubmit={handleSave} className="space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
+            <label className="block font-bold text-slate-700 uppercase tracking-wide text-xs mb-1.5">
               Host / IP Address:
             </label>
             <input
@@ -99,12 +99,12 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               value={host}
               onChange={(e) => setHost(e.target.value)}
               placeholder="127.0.0.1"
-              className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-xs"
+              className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-2xs text-xs font-semibold"
             />
           </div>
 
           <div>
-            <label className="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
+            <label className="block font-bold text-slate-700 uppercase tracking-wide text-xs mb-1.5">
               Port ZAP Proxy:
             </label>
             <input
@@ -112,12 +112,12 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               value={port}
               onChange={(e) => setPort(Number(e.target.value))}
               placeholder="8080"
-              className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-xs"
+              className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-2xs text-xs font-semibold"
             />
           </div>
 
           <div>
-            <label className="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
+            <label className="block font-bold text-slate-700 uppercase tracking-wide text-xs mb-1.5">
               ZAP API Key (Opsional):
             </label>
             <input
@@ -125,7 +125,7 @@ export const ZAPConfigModal: React.FC<ZAPConfigModalProps> = ({
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               placeholder="Kosongkan jika API key dinonaktifkan di ZAP Options"
-              className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-xs"
+              className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 font-mono shadow-2xs text-xs"
             />
           </div>
 

@@ -163,56 +163,56 @@ export const ReportModal: React.FC<ReportModalProps> = ({
 
           {/* Metric Summary Table */}
           <div className="space-y-3">
-            <h2 className="text-base font-bold text-slate-900 border-b border-slate-200 pb-1.5">
+            <h2 className="text-base font-bold text-slate-900 border-b border-slate-200 pb-1.5 font-sans">
               II. Ringkasan Kuantitatif Temuan Celah Keamanan
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
               <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800">
-                <span className="text-xs font-bold">High Severity</span>
+                <span className="text-xs font-bold uppercase tracking-wide">High Severity</span>
                 <p className="text-2xl font-extrabold font-mono mt-1 text-rose-600">{metrics?.severityCounts.high}</p>
-                <span className="text-[10px] text-rose-600 font-medium block mt-1">SLA: &lt; 24 Jam</span>
+                <span className="text-xs text-rose-700 font-semibold block mt-1">SLA: &lt; 24 Jam</span>
               </div>
               <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800">
-                <span className="text-xs font-bold">Medium Severity</span>
+                <span className="text-xs font-bold uppercase tracking-wide">Medium Severity</span>
                 <p className="text-2xl font-extrabold font-mono mt-1 text-amber-600">{metrics?.severityCounts.medium}</p>
-                <span className="text-[10px] text-amber-700 font-medium block mt-1">SLA: &lt; 72 Jam</span>
+                <span className="text-xs text-amber-800 font-semibold block mt-1">SLA: &lt; 72 Jam</span>
               </div>
               <div className="p-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-800">
-                <span className="text-xs font-bold">Low &amp; Info</span>
+                <span className="text-xs font-bold uppercase tracking-wide">Low &amp; Info</span>
                 <p className="text-2xl font-extrabold font-mono mt-1 text-blue-700">{(metrics?.severityCounts.low || 0) + (metrics?.severityCounts.info || 0)}</p>
-                <span className="text-[10px] text-blue-600 font-medium block mt-1">Security Hardening</span>
+                <span className="text-xs text-blue-700 font-semibold block mt-1">Security Hardening</span>
               </div>
               <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800">
-                <span className="text-xs font-bold">Tingkat Patching</span>
+                <span className="text-xs font-bold uppercase tracking-wide">Tingkat Patching</span>
                 <p className="text-2xl font-extrabold font-mono mt-1 text-emerald-600">{metrics?.resolutionRate}%</p>
-                <span className="text-[10px] text-emerald-700 font-medium block mt-1">MTTR: {metrics?.mttrHours} Jam</span>
+                <span className="text-xs text-emerald-800 font-semibold block mt-1">MTTR: {metrics?.mttrHours} Jam</span>
               </div>
             </div>
           </div>
 
           {/* Vulnerability Catalog Table */}
           <div className="space-y-3">
-            <h2 className="text-base font-bold text-slate-900 border-b border-slate-200 pb-1.5">
+            <h2 className="text-base font-bold text-slate-900 border-b border-slate-200 pb-1.5 font-sans">
               III. Rincian Temuan Kerentanan &amp; Rekomendasi Mitigasi Teknis
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
                 <thead className="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
                   <tr>
-                    <th className="py-2.5 px-3 border-r border-slate-200">Kode &amp; Risiko</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200">Nama Kerentanan</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200">Kategori OWASP</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200">Target Subdomain</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200">Dampak CIA</th>
-                    <th className="py-2.5 px-3">Rekomendasi Patch (Tepat Sasaran)</th>
+                    <th className="py-3 px-3.5 border-r border-slate-200">Kode &amp; Risiko</th>
+                    <th className="py-3 px-3.5 border-r border-slate-200">Nama Kerentanan</th>
+                    <th className="py-3 px-3.5 border-r border-slate-200">Kategori OWASP</th>
+                    <th className="py-3 px-3.5 border-r border-slate-200">Target Subdomain</th>
+                    <th className="py-3 px-3.5 border-r border-slate-200">Dampak CIA</th>
+                    <th className="py-3 px-3.5">Rekomendasi Patch (Tepat Sasaran)</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {vulnerabilities.map((vuln) => (
-                    <tr key={vuln.id} className="hover:bg-slate-50">
-                      <td className="py-3 px-3 font-mono border-r border-slate-200 whitespace-nowrap">
-                        <strong className="text-slate-900">{vuln.id}</strong>
-                        <div className={`text-[10px] font-bold ${
+                    <tr key={vuln.id} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3.5 px-3.5 font-mono border-r border-slate-200 whitespace-nowrap">
+                        <strong className="text-slate-900 font-bold">{vuln.id}</strong>
+                        <div className={`text-xs font-bold mt-0.5 ${
                           vuln.severity === 'High' ? 'text-rose-600' :
                           vuln.severity === 'Medium' ? 'text-amber-600' :
                           'text-blue-700'
@@ -220,24 +220,24 @@ export const ReportModal: React.FC<ReportModalProps> = ({
                           {vuln.severity} ({vuln.cvss})
                         </div>
                       </td>
-                      <td className="py-3 px-3 font-bold text-slate-900 border-r border-slate-200">
+                      <td className="py-3.5 px-3.5 font-bold text-slate-900 border-r border-slate-200">
                         {vuln.title}
-                        <div className="text-[10px] text-slate-500 font-mono font-normal">
+                        <div className="text-xs text-slate-500 font-mono font-normal mt-0.5">
                           {vuln.cwe.split(':')[0]}
                         </div>
                       </td>
-                      <td className="py-3 px-3 font-mono border-r border-slate-200 whitespace-nowrap text-slate-700 font-semibold">
+                      <td className="py-3.5 px-3.5 font-mono border-r border-slate-200 whitespace-nowrap text-slate-800 font-semibold text-xs">
                         {vuln.owaspCategory}
                       </td>
-                      <td className="py-3 px-3 font-mono text-[11px] border-r border-slate-200 text-slate-700">
+                      <td className="py-3.5 px-3.5 font-mono text-xs border-r border-slate-200 text-slate-800">
                         {vuln.subdomain}
                       </td>
-                      <td className="py-3 px-3 font-mono text-[10px] border-r border-slate-200 whitespace-nowrap text-slate-600 font-semibold">
+                      <td className="py-3.5 px-3.5 font-mono text-xs border-r border-slate-200 whitespace-nowrap text-slate-700 font-semibold">
                         C:{vuln.ciaImpact.confidentiality[0]} | I:{vuln.ciaImpact.integrity[0]} | A:{vuln.ciaImpact.availability[0]}
                       </td>
-                      <td className="py-3 px-3 text-[11px] text-slate-700">
-                        <strong className="text-blue-700">{vuln.remediation.quickFixTitle}</strong>
-                        <p className="text-[10px] text-slate-500 line-clamp-2 mt-0.5">
+                      <td className="py-3.5 px-3.5 text-xs text-slate-700">
+                        <strong className="text-blue-700 font-bold">{vuln.remediation.quickFixTitle}</strong>
+                        <p className="text-xs text-slate-600 line-clamp-2 mt-0.5 leading-relaxed">
                           {vuln.remediation.description}
                         </p>
                       </td>

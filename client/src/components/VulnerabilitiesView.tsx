@@ -65,11 +65,11 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
       <div className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+            <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
               Vulnerability Management
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-sans">
             Katalog Temuan Kerentanan &amp; Blueprint Remediasi
           </h2>
           <p className="text-sm text-slate-600 max-w-2xl leading-relaxed">
@@ -80,7 +80,7 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
         {/* Metric Badges */}
         <div className="flex items-center gap-3 shrink-0">
           <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center min-w-[85px]">
-            <span className="text-xs text-slate-500 block font-medium">Total</span>
+            <span className="text-xs text-slate-600 block font-semibold">Total</span>
             <p className="text-xl font-extrabold text-slate-900 font-mono">{vulnerabilities.length}</p>
           </div>
           <div className="px-4 py-2.5 rounded-xl bg-rose-50 border border-rose-200 text-center min-w-[85px]">
@@ -237,9 +237,9 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
               className="group bg-white hover:border-blue-400 border border-slate-200/90 rounded-xl p-5 shadow-xs transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
             >
               {/* Left Column: Details */}
-              <div className="space-y-2 flex-1 min-w-0">
+              <div className="space-y-2.5 flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                  <span className="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200">
                     {vuln.id}
                   </span>
 
@@ -253,11 +253,11 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                     {vuln.severity} &bull; CVSS {vuln.cvss}
                   </span>
 
-                  <span className="text-xs bg-slate-50 text-slate-700 px-2 py-0.5 rounded font-mono border border-slate-200 font-semibold">
+                  <span className="text-xs bg-slate-50 text-slate-800 px-2.5 py-0.5 rounded font-mono border border-slate-200 font-semibold">
                     {vuln.owaspCategory}: {vuln.owaspName}
                   </span>
 
-                  <span className="text-xs text-slate-400 font-mono">
+                  <span className="text-xs text-slate-500 font-mono font-medium">
                     {vuln.sprint}
                   </span>
                 </div>
@@ -265,30 +265,30 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                 {/* Title */}
                 <h3 
                   onClick={() => onSelectVulnerability(vuln)}
-                  className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer"
+                  className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer leading-snug"
                 >
                   {vuln.title}
                 </h3>
 
                 {/* Endpoint & CWE */}
                 <div className="flex flex-wrap items-center gap-y-1 gap-x-3 text-xs text-slate-600">
-                  <div className="bg-slate-50 border border-slate-200 px-2.5 py-1 rounded font-mono text-xs text-slate-800 font-medium truncate max-w-xl">
-                    Target: <span className="text-blue-700">{vuln.target}</span>
+                  <div className="bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-800 font-medium truncate max-w-xl">
+                    Target: <span className="text-blue-700 font-semibold">{vuln.target}</span>
                   </div>
                   <span className="text-slate-300 hidden sm:inline">&bull;</span>
-                  <span className="truncate max-w-sm text-slate-500 font-mono text-xs">
+                  <span className="truncate max-w-sm text-slate-600 font-mono text-xs">
                     {vuln.cwe}
                   </span>
                 </div>
 
                 {/* Assigned To & Detect info */}
-                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-0.5">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 pt-0.5">
                   <span>
-                    PIC Tim: <span className="text-slate-800 font-semibold">{vuln.assignedTo}</span>
+                    PIC Tim: <span className="text-slate-800 font-bold">{vuln.assignedTo}</span>
                   </span>
                   <span className="text-slate-300">&bull;</span>
                   <span>
-                    Terdeteksi: {new Date(vuln.detectedAt).toLocaleDateString('id-ID')}
+                    Terdeteksi: <strong className="text-slate-700 font-semibold">{new Date(vuln.detectedAt).toLocaleDateString('id-ID')}</strong>
                   </span>
                 </div>
               </div>
