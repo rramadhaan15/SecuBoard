@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, ChevronDown } from 'lucide-react';
 import { Vulnerability, OWASPCategoryInfo, Status } from '../types';
 
 interface VulnerabilitiesViewProps {
@@ -293,14 +293,14 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                 </div>
               </div>
 
-              {/* Right Column: Status Selector & Action Buttons (Uniform Width & Height) */}
+              {/* Right Column: Status Selector & Action Buttons (Uniform Width & Height, Centered Text) */}
               <div className="flex flex-col items-stretch sm:items-end justify-center gap-2 shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 w-full sm:w-auto">
                 {/* Status Selector Dropdown */}
-                <div className="w-full sm:w-48">
+                <div className="relative w-full sm:w-48">
                   <select
                     value={vuln.status}
                     onChange={(e) => onQuickStatusChange(vuln.id, e.target.value as Status)}
-                    className={`w-full h-9 text-xs font-bold px-3 rounded-lg border focus:outline-none transition-all cursor-pointer ${
+                    className={`w-full h-9 text-xs font-bold px-6 rounded-lg border focus:outline-none transition-all cursor-pointer appearance-none text-center [text-align-last:center] ${
                       vuln.status === 'Resolved'
                         ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100/70'
                         : vuln.status === 'In Progress'
@@ -310,17 +310,23 @@ export const VulnerabilitiesView: React.FC<VulnerabilitiesViewProps> = ({
                         : 'bg-rose-50 text-rose-800 border-rose-300 hover:bg-rose-100/70'
                     }`}
                   >
-                    <option value="Open">Status: Open</option>
-                    <option value="In Progress">Status: In Progress</option>
-                    <option value="Resolved">Status: Resolved</option>
-                    <option value="False Positive">Status: False Positive</option>
+                    <option value="Open" className="bg-white text-rose-800 text-center">Status: Open</option>
+                    <option value="In Progress" className="bg-white text-amber-800 text-center">Status: In Progress</option>
+                    <option value="Resolved" className="bg-white text-emerald-800 text-center">Status: Resolved</option>
+                    <option value="False Positive" className="bg-white text-slate-800 text-center">Status: False Positive</option>
                   </select>
+                  <ChevronDown className={`w-3.5 h-3.5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none ${
+                    vuln.status === 'Resolved' ? 'text-emerald-700' :
+                    vuln.status === 'In Progress' ? 'text-amber-700' :
+                    vuln.status === 'False Positive' ? 'text-slate-600' :
+                    'text-rose-700'
+                  }`} />
                 </div>
 
                 {/* Detail & Blueprint Button */}
                 <button
                   onClick={() => onSelectVulnerability(vuln)}
-                  className="w-full sm:w-48 h-9 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition-all flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer"
+                  className="w-full sm:w-48 h-9 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition-all flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer text-center"
                 >
                   <span>Blueprint Remediasi</span>
                   <span>&rarr;</span>

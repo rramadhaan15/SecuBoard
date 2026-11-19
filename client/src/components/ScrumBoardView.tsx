@@ -130,15 +130,15 @@ export const ScrumBoardView: React.FC<ScrumBoardViewProps> = ({
                         <select
                           value={task.status}
                           onChange={(e) => onUpdateTaskStatus(sprint.id, task.id, e.target.value)}
-                          className={`text-xs font-bold px-2.5 py-1 rounded-md border focus:outline-none transition-all ${
+                          className={`text-xs font-bold px-2.5 py-1 rounded-md border focus:outline-none transition-all text-center [text-align-last:center] cursor-pointer ${
                             task.status === 'Done' ? 'bg-emerald-50 border-emerald-300 text-emerald-800' :
                             task.status === 'In Progress' ? 'bg-blue-50 border-blue-300 text-blue-800' :
                             'bg-white border-slate-300 text-slate-700'
                           }`}
                         >
-                          <option value="Todo">Todo</option>
-                          <option value="In Progress">In Progress</option>
-                          <option value="Done">Done</option>
+                          <option value="Todo" className="text-center">Todo</option>
+                          <option value="In Progress" className="text-center">In Progress</option>
+                          <option value="Done" className="text-center">Done</option>
                         </select>
                       </div>
                     ))}
