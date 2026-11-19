@@ -7,7 +7,7 @@ interface HeaderProps {
   onStopScan: () => void;
   onToggleContinuous: () => void;
   onOpenZapConfig: () => void;
-  onOpenReport: () => void;
+  onOpenReport?: () => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }
@@ -97,14 +97,6 @@ export const Header: React.FC<HeaderProps> = ({
                 Scan Sekarang
               </button>
             )}
-
-            {/* Report Button */}
-            <button
-              onClick={onOpenReport}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 transition-colors"
-            >
-              Laporan TA
-            </button>
           </div>
         </div>
 
